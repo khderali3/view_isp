@@ -83,7 +83,7 @@ export default  async function   RootLayout({ children }) {
       <Setup />
       <Nav /> 
 
-      <div className="   "> 
+      <div className="  min-vh-100 "> 
 
 
       
