@@ -1,0 +1,864 @@
+/**
+ * Start Global Values
+ *
+ * @format
+ */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* end Global Values */
+/* Start Variables */
+:root {
+  --main-background-color: linear-gradient(
+    171.18deg,
+    #0f223c 10.6%,
+    #101925 88.52%
+  );
+  --primary-color: #101925;
+  --primary-2-color: #0f223c;
+  --main-font-color: #58b3c8;
+  --secondary-text-color: #e6e6e7;
+  --radia-gradient: radial-gradient(
+    310.49% 310.49% at 308.16% 126.24%,
+    #58b3c8 0%,
+    #101925 100%
+  );
+}
+/* End Variables */
+/* Start Component */
+.background-color {
+  background: var(--main-background-color);
+  background-position: center;
+}
+.background-image {
+  background-image: var(--background-image);
+  background-position: center;
+  background-size: cover;
+  opacity: 0.1;
+  position: absolute;
+  z-index: 1;
+}
+/* End Component */
+body {
+  font-family: "Poppins", sans-serif;
+  background-size: cover;
+}
+/* Start Header */
+.navbar .navbar-toggler {
+  color: var(--main-font-color);
+  font-size: 30px;
+}
+.navbar .container-fluid .navbar-brand img {
+  max-width: 195px;
+}
+.navbar-nav .nav-link {
+  color: var(--secondary-text-color);
+  transition: 0.1s;
+  height: 55px;
+}
+.navbar-nav .nav-link:hover {
+  color: var(--main-font-color);
+}
+
+/* .active_nav_link {
+  color: var(--main-font-color) !important;
+  border-bottom: 1px solid var(--main-font-color); 
+ 
+} */
+
+
+.active {
+  color: var(--main-font-color) !important;
+  border-bottom: 1px solid var(--main-font-color); 
+ 
+}
+
+.active_nav_link {
+  color: var(--main-font-color) !important;
+  border-bottom: 1px solid var(--main-font-color); 
+}
+
+button.btn.btn-primary {
+  background-color: var(--main-font-color);
+  border: none;
+}
+.navbar .Eng {
+  color: var(--secondary-text-color);
+}
+/*End Header*/
+/*Start Landing*/
+.home-section {
+  position: relative;
+  width: 100%;
+  min-height: calc(10vh - 500px);
+  margin-top: -0.9px;
+  background: var(--main-background-color);
+}
+.home-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.home-section .container {
+  width: 100%;
+  height: 70vh;
+}
+
+
+
+.home-section .container .text-center {
+  flex-basis: 50%;
+  position: relative;
+  z-index: 9;
+}
+.home-section .cube {
+  flex-basis: 50%;
+  position: relative;
+  z-index: 1;
+}
+.home-section .cube img {
+  max-width: 100%;
+}
+/*End Landing*/
+/* Start about-us-section */
+.about-us-section {
+  background-color: var(--primary-color);
+  margin-top: -0.9px;
+}
+.about-us-section .content .text {
+  flex-basis: 25%;
+  letter-spacing: 1px;
+}
+.about-us-section .content .text h3 {
+  color: var(--main-font-color);
+  font-weight: 700;
+  font-size: 40px;
+}
+.about-us-section .content .text p {
+  color: var(--secondary-text-color);
+  font-size: 18px;
+  
+}
+.about-us-section .content .text p span {
+  font-weight: bold;
+}
+.about-us-section .pargh {
+  flex-basis: 50%;
+  line-height: 1.8;
+}
+/* End about-us-section*/
+/* Start why-us-section*/
+.why-us-section {
+  position: relative;
+  width: 100%;
+  min-height: 30vh;
+  background: var(--main-background-color);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: -0.9px;
+}
+
+
+
+
+.why-us-section::before {
+  content: "";
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.why-us-section .container-fluid {
+  min-height: 30vh;
+}
+.why-us-section .container-fluid .img {
+  max-width: 100%;
+  position: relative;
+}
+.why-us-section .container-fluid .img::before {
+  content: "";
+  position: absolute;
+  height: calc(100% + 200px);
+  border: 2px solid var(--main-font-color);
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 68px);
+  border-radius: 41px;
+}
+.why-us-section .container-fluid .img img {
+  max-width: 326px;
+}
+.why-us-section .container-fluid .text {
+  flex-basis: 45%;
+  padding-top: 100px;
+  position: relative;
+  z-index: 7;
+}
+@media (min-width: 767px) and (max-width: 991px) {
+  .why-us-section {
+    padding-top: 120px;
+  }
+  .why-us-section .container-fluid .text {
+    margin-top: 200px;
+  }
+}
+.why-us-section .container-fluid .text h2 {
+  color: var(--main-font-color);
+  font-weight: 700;
+  font-size: 40px;
+}
+.why-us-section .container-fluid .text h4 {
+  color: var(--secondary-text-color);
+  font-weight: 600;
+  font-size: 18px;
+}
+.why-us-section .container-fluid .text ul {
+  color: var(--secondary-text-color);
+  margin-bottom: 5px;
+}
+.why-us-section .container-fluid .text .but {
+  width: 100%;
+}
+.why-us-section .container-fluid .text .but button {
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--secondary-text-color);
+  background: none;
+}
+.why-us-section .container-fluid .text .but i {
+  color: white !important;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+
+
+@media (max-width: 767px) {
+  .why-us-section .container-fluid .img::before {
+    max-width: 70%;
+  }
+  .why-us-section {
+    padding-top: 120px;
+  }
+}
+@media (max-width: 991px) {
+  .why-us-section .container-fluid .img::before {
+    max-width: 60%;
+  }
+  .why-us-section .container-fluid .img img {
+    max-width: 265px;
+  }
+}
+@media (min-width: 375px) and (max-width: 546px) {
+  .why-us-section {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+  .why-us-section .container-fluid .img img {
+    max-width: 185px;
+  }
+  .why-us-section .container-fluid .img::before {
+    max-width: 80%;
+    max-height: 220px;
+  }
+}
+
+
+
+/* End why-us-section */
+/* Start Products-Section */
+.products-section {
+  min-height: 80vh;
+  background-color: var(--primary-color);
+  padding-top: 60px;
+  padding-bottom: 80px;
+  margin-top: -0.9px;
+}
+.products-section .container .product-1 {
+  background-color: #0e1520;
+}
+
+/* product image index page   */
+/* .products-section .container .product-1 img {
+  max-width: 100%;
+
+} */
+
+.index_product_iamge {
+  /* max-width: 100%; */
+  /* object-fit: contain; 
+  border-radius: 10px;  */
+  /* height:20vh;
+  width: 25vw; */
+ 
+  
+
+}
+
+
+
+
+
+
+.image_product_dait {
+  object-fit: contain; /*Ensures the image is fully visionble, without cropping */
+  border-radius: 10px; /* Optional for rounded corners */
+  height: 50vh;
+  width: 60vw;
+}
+
+
+
+
+.products-section .container-fluid .content .product-1 h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.products-section .container .product-1 p {
+  color: white;
+}
+.sroducts-section .container .product-1 .but {
+  background-color: var(--main-font-color);
+}
+
+
+
+.products-section .container .product-1 .but button {
+  background: none;
+  border: none;
+  letter-spacing: 2px;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+.products-section .container .text h3 {
+  color: var(--main-font-color);
+}
+.products-section .container .but{
+  background-color: var(--main-font-color);
+}
+/* End Products-Section */
+
+
+
+/* Start Services Section*/
+.services {
+  width: 100%;
+  position: relative;
+  min-height: 30vh;
+  background: var(--main-background-color);
+  margin-top: -0.9px;
+}
+
+
+
+.services::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.services .container {
+  width: 100%;
+  min-height: 40vh;
+}
+.services .container .row .text {
+  position: relative;
+  z-index: 5;
+}
+.services .container .row .text h2 {
+  color: var(--main-font-color);
+  font-weight: 700;
+}
+.services .container .row .text p {
+  font-size: 36px;
+}
+.services .container .row .tog1 {
+  position: relative;
+  z-index: 6;
+}
+/* End Services Section */
+/* Start vision Section*/
+.vision {
+  min-height: 30vh;
+  padding: 60px;
+  background-color: var(--primary-color);
+  margin-top: -0.9px;
+}
+.vision .container-fluid {
+  min-height: 30vh;
+}
+.vision .container-fluid .text {
+  min-height: 30vh;
+}
+.vision .container-fluid .text h3 {
+  color: var(--main-font-color);
+  font-size: 40px;
+  font-weight: 700;
+}
+.vision .container-fluid .text p {
+  color: var(--secondary-text-color);
+  font-size: 18px;
+  text-align: center;
+  max-width: 50%;
+}
+@media (max-width: 991px) {
+  .vision .container-fluid .text p {
+    max-width: 100%;
+  }
+}
+/* End vision Section*/
+/* Start foc Section */
+.focus-section {
+  width: 100%;
+  min-height: 50vh;
+  background: var(--radia-gradient);
+  position: relative;
+  margin-top: -0.9px;
+}
+.focus-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.focus-section .container-fluid {
+  width: 100%;
+  min-height: 50vh;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.focus-section .container-fluid .fts {
+  flex-basis: 60%;
+  padding: 60px;
+  position: relative;
+  z-index: 2;
+}
+.focus-section .container-fluid .ft h2 {
+  color: var(--main-font-color);
+  font-weight: 900;
+}
+.focus-section .container-fluid .fts p {
+  color: var(--secondary-text-color);
+}
+.focus-section .container-fluid .ouvc-img {
+  max-width: 100%;
+}
+.focus-section .container-fluid img {
+  max-width: 35%;
+}
+
+
+
+
+@media (max-width: 991px) {
+  .focus-section .container-fluid img {
+    max-width: 90%;
+  }
+}
+/*  End foc Section */
+/* Start some of our clients section */
+.clients {
+  min-height: 30vh;
+  padding: 80px;
+}
+.clients .container-fluid {
+  min-height: 30vh;
+}
+.clients .container-fluid .text {
+  color: var(--secondary-text-color);
+}
+.clients .container-fluid .collab {
+  min-height: 100%;
+  width: 100%;
+}
+.clients .container-fluid .collab img {
+  max-width: 10%;
+}
+
+
+
+
+
+/* Start Services Section*/
+
+/* End Services Section */
+.services {
+  width: 100%;
+  position: relative;
+  min-height: 30vh;
+  background: var(--main-background-color);
+  margin-top: -0.9px;
+}
+.services::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.services .container {
+  width: 100%;
+  min-height: 40vh;
+}
+.services .container .row .text {
+  position: relative;
+  z-index: 5;
+}
+.services .container .row .text h2 {
+  color: var(--main-font-color);
+  font-weight: 700;
+}
+.services .container .row .text p {
+  font-size: 36px;
+}
+.services .container .row .tog1 {
+  position: relative;
+  z-index: 6;
+}
+/* Start vision Section*/
+.vision {
+  min-height: 30vh;
+  padding: 60px;
+  background-color: var(--primary-color);
+  margin-top: -0.9px;
+}
+.vision .container-fluid {
+  min-height: 30vh;
+}
+.vision .container-fluid .text {
+  min-height: 30vh;
+}
+.vision .container-fluid .text h3 {
+  color: var(--main-font-color);
+  font-size: 40px;
+  font-weight: 700;
+}
+.vision .container-fluid .text p {
+  color: var(--secondary-text-color);
+  font-size: 18px;
+  text-align: center;
+  max-width: 50%;
+}
+@media (max-width: 991px) {
+  .vision .container-fluid .text p {
+    max-width: 100%;
+  }
+}
+/* End vision Section*/
+/* Start foc Section */
+.focus-section {
+  width: 100%;
+  min-height: 50vh;
+  background: var(--radia-gradient);
+  position: relative;
+  margin-top: -0.9px;
+}
+.focus-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.focus-section .container-fluid {
+  width: 100%;
+  min-height: 50vh;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.focus-section .container-fluid .fts {
+  flex-basis: 60%;
+  padding: 60px;
+  position: relative;
+  z-index: 2;
+}
+.focus-section .container-fluid .ft h2 {
+  color: var(--main-font-color);
+  font-weight: 900;
+}
+.focus-section .container-fluid .fts p {
+  color: var(--secondary-text-color);
+}
+.focus-section .container-fluid .ouvc-img {
+  max-width: 100%;
+}
+.focus-section .container-fluid img {
+  max-width: 35%;
+}
+@media (max-width: 991px) {
+  .focus-section .container-fluid img {
+    max-width: 90%;
+  }
+}
+/*  End foc Section */
+/* Start some of our clients section */
+ .clients {
+  min-height: 30vh;
+  padding: 80px;
+}
+.clients .container-fluid {
+  min-height: 30vh;
+}
+.clients .container-fluid .text {
+  color: var(--secondary-text-color);
+}
+.clients .container-fluid .collab {
+  min-height: 100%;
+  width: 100%;
+}
+.clients .container-fluid .collab img {
+  max-width: 10%;
+} 
+
+
+
+.carousel-item img {
+  max-width: 15%;
+  min-height: 10%;
+}
+.carousel-item {
+  height: 30%;
+}
+/* End some of our clients section */
+/* Start touch   Section*/
+.contact {
+  width: 100%;
+  position: relative;
+  min-height: 30vh;
+  background: var(--main-background-color);
+  margin-top: -0.9px;
+}
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/Images/pattern.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+.contact .container {
+  width: 100%;
+  min-height: 30vh;
+}
+.contact .container .but {
+  position: relative;
+  z-index: 10;
+}
+.contact .container .but button {
+  border: none;
+  background-color: var(--main-font-color);
+}
+
+.contact .container h3 {
+position: relative;
+z-index: 60;
+}
+/* End touch Section*/
+/* Start Register */
+.registration-form {
+  min-height: 92vh;
+  /* Register page*/
+}
+.or {
+  position: relative;
+}
+.registration-form .or::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 15px;
+  background-color: #6c757d;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 43%;
+}
+.registration-form .or::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 15px;
+  background-color: #6c757d;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 43%;
+}
+img.prof {
+  max-width: 30px;
+  max-height: 30px;
+}
+li.prof {
+  top: 15px;
+}
+
+li.prof:hover {
+  background-color: transparent; /* or any value to neutralize the background */
+  color: inherit; /* Neutralize text color */
+  /* Any other hover effect you want to remove can go here */
+}
+
+a.bg-focus:hover {
+  background-color: var(--main-font-color);
+}
+.form-control:focus {
+  box-shadow: none;
+}
+/*End Register page*/
+
+/*
+Start Products-Section-info section 
+ */
+
+.products-info {
+  min-height: 100vh;
+  background: var(--main-background-color);
+}
+.products-info .container .text h2 {
+  font-weight: bolder;
+  letter-spacing: 2px;
+}
+.products-info .container .text p {
+  letter-spacing: 1px;
+}
+
+/* Start footer */
+footer {
+  background-color: var(--primary-color);
+  background-position: center;
+  color: white;
+  width: 100%;
+  margin-top: -0.9px;
+  position: relative;
+}
+footer::before{
+  content: "";
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+footer .container .row {
+  position: relative;
+  z-index: 10;
+}
+
+
+
+footer a {
+  text-decoration: none;
+}
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+.footer-links {
+  list-style-type: none;
+  
+}
+.footer-links > li{
+  margin-bottom: 5px;
+  margin: 0;
+  padding: 0;
+  
+}
+.footer-social {
+  padding: 0;
+ 
+}
+.footer-social li {
+  display: inline;
+  margin-right: 10px;
+  
+}
+.footer-copyright {
+  min-height: 4vh;
+  width: 100%;
+}
+.footer-copyright .footer-img img {
+  max-width: 100%;
+  object-fit: contain;
+  height: 4vh;
+}
+.footer-section{
+  background: linear-gradient(to bottom, #0b3457, #000000);
+  height: 8vh;
+}
+.footer-section .footer-background{
+    max-width: 100%;
+}
+footer .container .row > div{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* End footer */
+
+.support-drop{
+  left: auto !important;
+  right: 60px !important;
+}
+/* .navbar .dropdown-menu {
+  right: 60px;
+  left: auto;
+} */
+
+
+
+.custom_min_vh_100 {
+  min-height: 100vh !important;
+}

@@ -1,0 +1,200 @@
+the problem still 
+
+any way here is my middle ware :
+
+
+
+
+import threading
+from .custom_app_utils import get_client_ip
+
+_thread_locals = threading.local()
+
+def get_current_request():
+    return getattr(_thread_locals, 'request', None)
+
+def get_current_user():
+ 
+    request = get_current_request()
+    if request and hasattr(request, 'user'):
+        return request.user
+    return None
+
+def get_current_ip_address():
+ 
+
+    request = get_current_request()
+    if request:
+        return get_client_ip(request)
+    return None
+
+
+
+class RequestMiddleware:
+ 
+    def __init__(self, get_response):
+ 
+        self.get_response = get_response
+
+    def __call__(self, request):
+        _thread_locals.request = request
+        try:
+            response = self.get_response(request)
+        except Exception as e:
+            # Ensure request is cleaned even if an exception happens
+            _thread_locals.request = None
+            
+        finally:
+            _thread_locals.request = None
+        return response
+
+
+
+
+and here is my signal:
+
+import json
+from django.db.models.signals import pre_save, post_save, pre_delete
+from django.dispatch import receiver
+from django.utils import timezone
+from .models import Log
+# from .custom_app_utils import get_client_ip
+ 
+
+
+from django_project.middleware import get_current_user, get_current_ip_address
+
+from django.contrib.admin.models import LogEntry  # Make sure you import this
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+ 
+from django.db.models.signals import m2m_changed
+
+from django.forms.models import model_to_dict
+
+
+@receiver(m2m_changed)
+def track_m2m_changes(sender, instance, action, model, pk_set, **kwargs):
+    
+    if action not in ["post_add", "post_remove", "post_clear"]:
+        return
+
+    try:
+        if action == "post_clear":
+            changes = {f"{model.__name__}_objects": {"cleared": True}}
+        else:
+            related_objects = model.objects.filter(pk__in=pk_set)
+            simplified_data = []
+
+            for obj in related_objects:
+                obj_dict = model_to_dict(obj, exclude=[field.name for field in obj._meta.many_to_many])
+                # Optionally include M2M names/IDs manually
+                if hasattr(obj, 'permissions'):
+                    obj_dict['permissions'] = list(obj.permissions.values_list('name', flat=True))
+                simplified_data.append(obj_dict)
+
+            changes = {
+                f"{model.__name__}_objects": {
+                    action: simplified_data
+                }
+            }
+
+        Log.objects.create(
+            user=get_current_user(),
+            action_type=Log.EDIT,
+            model_name=instance.__class__.__name__,
+            object_id=instance.pk,
+            object_description=str(instance),
+            timestamp=timezone.now(),
+            changes=changes,
+            ip_address=get_current_ip_address(),
+        )
+    except Exception as e:
+        print("M2M log error:", str(e))
+
+
+
+
+
+
+
+
+
+@receiver(pre_save)
+def log_model_edit(sender, instance, **kwargs):
+    if sender == Log:
+        return  # Prevent logging Log model changes
+    try:
+        old_instance = sender.objects.get(pk=instance.pk)
+        changes = {}
+        for field in instance._meta.fields:
+            field_name = field.name
+            old_value = getattr(old_instance, field_name)
+            new_value = getattr(instance, field_name)
+            if old_value != new_value:
+
+                try:
+                    json.dumps(old_value)  # test serializability
+                    old_value = old_value
+                except TypeError:
+                    old_value = str(old_value)
+
+                try:
+                    json.dumps(new_value)  # test serializability
+                    new_value = new_value
+                except TypeError:
+                    new_value = str(new_value)
+
+                changes[field_name] ={ 'old': old_value,'new': new_value }
+                
+
+        if changes:
+ 
+            try:
+                Log.objects.create(
+                    # user=getattr(instance, 'modified_by', None),
+                    user=get_current_user(),
+                    
+                    action_type=Log.EDIT,
+                    model_name=sender.__name__,
+                    object_id=instance.pk,
+                    object_description=str(instance),
+                    timestamp=timezone.now(),
+                    changes=changes,
+                    ip_address=get_current_ip_address(),
+                    )
+            except:
+                pass
+    except sender.DoesNotExist:
+        # Object is new, will be handled in post_save
+        pass
+
+
+
+
+
+
+note , i make a small test ,
+
+ if changes:
+    return 
+
+the problem solved .
+
+
+change "user" and "ip_address" to None = the problem not solve , what do you think the problem ?
+
+
+
+problem is :
+when i try to login with google , i see eerror messages :
+
+Unexpected token 'S', "SessionInt"... is not valid JSON
+
+
+and : File "D:\programing_proejects\cloud_tech\back\myenv_39\lib\site-packages\django\contrib\sessions\middleware.py", line 61, in process_response
+    raise SessionInterrupted(
+django.contrib.sessions.exceptions.SessionInterrupted: The request's session was deleted before the request completed. The user may have logged out in a concurrent request, for example.
+[23/May/2025 11:10:56] "GET /api/o/google-oauth2/?redirect_uri=http://localhost:3000/account/google HTTP/1.1" 400 26383

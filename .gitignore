@@ -1,0 +1,7 @@
+back/myenv_39/
+back/django_project/db.sqlite3
+back/django_project/.env
+
+
+front/my_app/node_modules
+front/my_app/.env*

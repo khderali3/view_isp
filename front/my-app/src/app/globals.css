@@ -1,0 +1,396 @@
+:root {
+  --main-background-color: linear-gradient(
+    171.18deg,
+    #0f223c 10.6%,
+    #101925 88.52%
+  );
+  --primary-color: #101925;
+  --primary-2-color: #0f223c;
+  --main-font-color: #58b3c8;
+  --secondary-text-color: #e6e6e7;
+  --radia-gradient: radial-gradient(
+    310.49% 310.49% at 308.16% 126.24%,
+    #58b3c8 0%,
+    #101925 100%
+  );
+}
+
+
+.sliderContainer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .slide {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .image_slider {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;  /* Ensures the image is fully visible, without cropping */
+    border-radius: 10px;  /* Optional for rounded corners */
+    color: wheat;
+  }
+
+  .slick-dots li button:before {
+    color: white !important;
+    
+  }
+
+  /* Remove the box-shadow */
+.btn:focus, .btn:active {
+  box-shadow: none !important;
+}
+
+
+
+
+.min-vh-150 {
+  min-height: 150vh;
+}
+
+
+.form-floating label {
+  font-size: 0.85rem;
+}
+.form-control-sm {
+  height: calc(1.5em + 0.5rem + 2px);  
+}
+
+.not_showing {
+  display: none !important;
+}
+
+.services .container .row {
+  z-index: 1;
+}
+
+
+
+
+ .app-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  max-height: 100vh;
+
+}
+
+ 
+ 
+
+.without_marker::marker {
+  content: none;
+}
+
+.language_select:focus, select:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+ 
+/* .sidebar-wrapper {
+  scrollbar-color:rgb(15, 1, 32) #939296 ;
+} */
+
+ 
+
+ 
+ .nav-item:hover {
+  background-color: #4692dd1e;
+  color: #fff;
+}
+
+
+.nav_item_active {
+  background-color: #4692dd1e;
+  color: #fff;
+}
+
+
+/* for staff forms  */
+input[readonly] {
+  background-color: #e9ecef !important; /* Light gray background */
+  cursor: not-allowed; /* Optional: change cursor to indicate readonly */
+}
+textarea[readonly] {
+  background-color: #e9ecef !important; /* Light gray background */
+  cursor: not-allowed; /* Optional: change cursor to indicate readonly */
+}
+
+
+
+
+
+ 
+
+
+
+
+.product_img_staff {
+  background-color: var(--primary-color) ;
+}
+
+
+
+.ul_staff {
+  list-style-type: none;  
+}
+
+ 
+
+ 
+ 
+.form-check-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+ 
+
+
+[dir="ltr"] .active_class {
+  background-color: transparent; /* Keep background transparent */
+  border-left: 4px solid #007bff; /* Active border on the left */
+  color: #007bff !important; /* Match the active color to the theme */
+  font-weight: bold; /* Make the active link more prominent */
+  padding-left: 1.5rem; /* Adjust padding to accommodate the border */
+}
+
+[dir="rtl"] .active_class {
+  background-color: transparent; /* Keep background transparent */
+  border-right: 4px solid #007bff; /* Active border on the left */
+  color: #007bff !important; /* Match the active color to the theme */
+  font-weight: bold; /* Make the active link more prominent */
+  padding-right: 1.5rem; /* Adjust padding to accommodate the border */
+}
+
+
+.btn-flexible {
+  min-width: 120px;
+  padding: 0.5rem 1rem;
+}
+
+.disabled_link {
+  cursor: not-allowed;   /* Show the "not-allowed" cursor */
+  opacity: 0.5;
+}
+
+ 
+
+
+/* Ensure sidebar scrolling on small screens */
+.sidebar-wrapper {
+  overflow-y: auto !important; /* Allow vertical scrolling */
+  height: 100vh; /* Ensure full viewport height */
+}
+
+ 
+
+
+
+/* start for account forms pages on site users  */
+[dir="rtl"] .form-floating > label {
+  right: 0;
+  left: auto;
+  text-align: right;
+}
+
+[dir="ltr"] .form-floating > label {
+  left: 0;
+  right: auto;
+  text-align: left;
+}
+
+  /* end for account forms pages on site users  */
+
+
+ 
+
+[dir="rtl"] .modal-header {
+    flex-direction: row-reverse !important;  
+
+}
+
+ /* test khder  */
+
+ [dir="rtl"]  .sidebar-menu   {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"]  .sidebar-menu > li   {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"]  ul  {
+  padding-right: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}     
+
+/* next text  */
+
+ 
+/* [dir="rtl"] .form-check-reverse {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+[dir="rtl"] .form-check-input {
+  float: right;
+  margin-right: 0;
+  margin-left: 0.5rem;
+} */
+
+select.form-select {
+  box-shadow: none !important;
+}
+select.form-select:focus,
+select.form-select:hover {
+  box-shadow: none !important;
+  outline: none !important;  
+}
+
+ 
+
+
+/* .pwa-prompt {
+  position: fixed;   
+  bottom: 20px;   
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.9);  
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999 !important;   
+  display: flex;
+  align-items: center;
+  gap: 10px;
+} */
+
+.pwa-prompt {
+  position: fixed !important; 
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  z-index: 1050 !important; /* Bootstrap modal z-index for proper layering */
+}
+
+ 
+
+/* start timeline  */
+/*  
+.timeline {
+  position: relative !important;
+  border-left: 3px solid #dee2e6 !important;
+}
+
+.timeline-item {
+  position: relative !important;
+  margin-bottom: 20px !important;
+}   
+
+
+
+.sub-timeline {
+  position: relative !important;
+  border-left: 2px solid #dee2e6 !important;
+}
+
+.sub-timeline-item {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+
+
+
+
+
+
+.timeline-dash {
+  position: relative !important;
+  border-left: 3px solid #dee2e6 !important;
+}
+
+.timeline-item-dash {
+  position: relative !important;
+  margin-bottom: 20px !important;
+}   
+
+
+
+.sub-timeline-dash {
+  position: relative !important;
+  border-left: 2px solid #dee2e6 !important;
+}
+
+.sub-timeline-item-dash {
+  position: relative !important;
+  margin-bottom: 15px !important;
+} */
+
+/* end timeline */
+
+
+.timeline,
+.timeline-dash {
+  position: relative !important;
+  border-inline-start: 3px solid #dee2e6 !important;
+}
+
+.timeline-item,
+.timeline-item-dash {
+  position: relative !important;
+  margin-bottom: 20px !important;
+}
+
+.sub-timeline,
+.sub-timeline-dash {
+  position: relative !important;
+  border-inline-start: 2px solid #dee2e6 !important;
+}
+
+.sub-timeline-item,
+.sub-timeline-item-dash {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+
+
+
+/* for datatiem input fields */
+
+html[dir="rtl"] .react-datepicker__close-icon {
+  left: 0.75rem !important;
+  right: auto !important;
+}
+
+/* for statistics page */
+.hover-zoom {
+  transition: transform 0.2s ease-in-out;
+}
+.hover-zoom:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+
+/* logs */
+.sticky-bottom-buttons {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 1050 !important;
+}

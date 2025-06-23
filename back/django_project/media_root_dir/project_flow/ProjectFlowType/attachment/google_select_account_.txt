@@ -1,0 +1,1 @@
+https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?response_type=code&access_type=online&client_id=909524227558-9mnah1lj5cv8sgeacsb97a9p8lomd10a.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fapi.vidnoz.com%2Fgoogle-redirect&state&scope=email%20profile&prompt=select_account&service=lso&o2v=2&ddm=0&flowName=GeneralOAuthFlow

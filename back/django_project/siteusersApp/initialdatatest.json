@@ -1,0 +1,463 @@
+[
+  {
+    "model": "siteusersApp.HomeSection",
+    "pk": 1,
+    "fields": {
+      "home_sec_title": "A different approach in the field of technology",
+      "home_sec_details": "We proudly provide you with a fast &amp; distinguished service.",
+      "home_sec_created_date": "2024-11-08T18:37:51.037546Z",
+        "home_sec_updated_date": "2024-11-08T18:37:51.037546Z",
+        "home_sec_image": "initial_images/laptop_first_sc.png"
+    }
+  },
+  {
+    "model": "siteusersApp.AboutUs",
+    "pk": 1,
+    "fields": {
+      "about_us_title": "who we are?",
+      "about_us_company_name": "Cloud Tech",
+      "about_us_hint": " is a leading company in the field of technology and IT solutions.",
+      "about_us_youtube_url" : "https://www.youtube.com/embed/khCGRsbRW-A?si=MGvNIX8gXGpwbWye" ,
+      "about_us_details": "we have provided a remarkable service for a big slide of the companies, agencies, banks, trademarks, global plus local organizations and VIP customers successfully since the company launch till now, we and our customers are so satisfied, relief and proud with the results and work done.",
+      "about_us_created_date": "2024-11-08T18:37:51.037546Z",
+      "about_us_updated_date": "2024-11-08T18:37:51.037546Z"
+
+    }
+  },
+  {
+    "model": "siteusersApp.WhyUs",
+    "pk": 1,
+    "fields": {
+      "why_us_title": "Why Us?",
+      "why_us_details": "Lorem ipsum dolor sit amet consectetur. Diam mattis odio ornare facilisi Eu:",
+      "why_us_image": "initial_images/CLOUD_TECH_sky_White.png",
+      "why_us_created_date": "2024-11-08T18:37:51.037546Z",
+      "why_us_updated_date": "2024-11-08T18:37:51.037546Z"
+
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 1,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 2,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 3,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 4,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 5,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 6,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.FeatureWhyUs",
+    "pk": 7,
+    "fields": {      
+      "feat_whyus_title": "Lorem ipsum dolor sit amet5",
+      "feat_whyus_created_date": "2024-11-08T18:37:51.037546Z",
+      "feat_whyus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.ProductSection",
+    "pk": 1,
+    "fields": {      
+      "prd_sec_title": "Our products",
+      "prd_sec_hint": "High quality, reasonable prices",
+      "prd_sec_created_date": "2024-11-08T18:37:51.037546Z",
+      "prd_sec_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Product",
+    "pk": 1,
+    "fields": {      
+      "prod_name": "Microwave Links Equipment",
+      "prod_name_hint": "(From A to Z)",
+      "prod_details": "Lorem ipsum dolor sit amet consectetur.\n \n Diam mattis odio ornare facilisi Eu etiam suspendisse habitasse\\n\\nvenenatis mi eleifend scelerisque",
+
+
+      "prod_image": "initial_images/services.png",
+      "prod_created_date": "2024-11-08T18:37:51.037546Z",
+      "prod_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Product",
+    "pk": 2,
+    "fields": {      
+      "prod_name": "Microwave Links Equipment",
+      "prod_name_hint": "(From A to Z)",
+      "prod_details": "Lorem ipsum dolor sit amet consectetur.\n \n Diam mattis odio ornare facilisi Eu etiam suspendisse habitasse\\n\\nvenenatis mi eleifend scelerisque",
+
+
+      "prod_image": "initial_images/services.png",
+      "prod_created_date": "2024-11-08T18:37:51.037546Z",
+      "prod_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Product",
+    "pk": 3,
+    "fields": {      
+      "prod_name": "Microwave Links Equipment",
+      "prod_name_hint": "(From A to Z)",
+
+      "prod_details": "Lorem ipsum dolor sit amet consectetur.\n \n Diam mattis odio ornare facilisi Eu etiam suspendisse habitasse\\n\\nvenenatis mi eleifend scelerisque",
+
+      "prod_image": "initial_images/services.png",
+      "prod_created_date": "2024-11-08T18:37:51.037546Z",
+      "prod_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurServicesSection",
+    "pk": 1,
+    "fields": {      
+      "servic_sec_title": "Our Services",
+      "servic_sec_sub_title": "the Best in the markets",
+      "servic_sec_hint": "We are committed to give the perfect scenarios of the following:",
+      "servic_sec_created_date": "2024-11-08T18:37:51.037546Z",
+      "servic_sec_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 1,
+    "fields": {      
+      "service_name": "Surveillance Systems",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 2,
+    "fields": {      
+      "service_name": "Monitoring Systems",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 3,
+    "fields": {      
+      "service_name": "Storage Solutions",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 4,
+    "fields": {      
+      "service_name": "Asymmetric &amp; Symmetric DSL",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 5,
+    "fields": {      
+      "service_name": "Fiber Connections",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Service",
+    "pk": 6,
+    "fields": {      
+      "service_name": "Microwave Link installation",
+      "service_detail": "service detail ",
+      "service_image": null,
+      "service_created_date": "2024-11-08T18:37:51.037546Z",
+      "service_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurVision",
+    "pk": 1,
+    "fields": {      
+      "our_vision_title": "Our Vision",
+      "our_vision_detail": "is to reach our goals of providing the best IT services to our clients. We see our business as one of the top-performing IT companies in the industry that can acknowledge client problems.",
+      "our_vision_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_vision_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Focus",
+    "pk": 1,
+    "fields": {      
+      "focus_title": "We'll stay focus",
+      "focus_detail": " resolving our customer’s issues by conducting consultation and solutions, which requires our full focus.",
+      "focus_image": "initial_images/foces.png",
+      "focus_created_date": "2024-11-08T18:37:51.037546Z",
+      "focus_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClientSection",
+    "pk": 1,
+    "fields": {      
+      "our_client_sec_title": "Some Of Our Clients",
+      "our_client_sec_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_sec_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 2,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/ByblosBank.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 3,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/CMA CGM.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 4,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/DHL.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 5,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/emmatell.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 6,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/HARAM.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 7,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/jica.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 8,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/KATAKIT.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 9,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/KINGDOM.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 10,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/mamarek.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 11,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/pronet.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 12,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/QNB_Logo.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 13,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/samanet-logo.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 14,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/Sarc.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 15,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/الائتمان الأهلي.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 16,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/الشام.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 17,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/بنك سورية والخليج.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.OurClient",
+    "pk": 18,
+    "fields": {      
+      "our_client_name": "We'll stay focus",
+      "our_client_image": "initial_images/clients/bankpemo.png",
+      "our_client_created_date": "2024-11-08T18:37:51.037546Z",
+      "our_client_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.CompnayIfRight",
+    "pk": 1,
+    "fields": {      
+      "company_if_right_title": " Want to know if CloudTech is the right fit for your project?",
+      "company_if_right_created_date": "2024-11-08T18:37:51.037546Z",
+      "company_if_right_updated_date": "2024-11-08T18:37:51.037546Z"
+    }
+  },
+  {
+    "model": "siteusersApp.Footer",
+    "pk": 1,
+    "fields": {      
+      "about_us_content": "Cloud Tech Sky provides top-notch IT and network solutions for your business needs.",
+      "contact_us_email": "info@CloudTech-it.com",
+      "contact_us_phone": "+123 456 7890"
+    }
+  },
+  {
+    "model": "siteusersApp.SocialMedia",
+    "pk": 1,
+    "fields": {      
+      "facebook_url": "www.test.com",
+      "youtube_url": "www.test.com",
+      "instagram_url": "www.test.com",
+      "linkedIn_url": "www.test.com", 
+      "twitter_url": "www.test.com" 
+    }
+  }
+  
+  
+  
+]

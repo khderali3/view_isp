@@ -1,0 +1,202 @@
+:root {
+  --main-background-color: linear-gradient(
+    171.18deg,
+    #0f223c 10.6%,
+    #101925 88.52%
+  );
+  --primary-color: #101925;
+  --primary-2-color: #0f223c;
+  --main-font-color: #58b3c8;
+  --secondary-text-color: #e6e6e7;
+  --radia-gradient: radial-gradient(
+    310.49% 310.49% at 308.16% 126.24%,
+    #58b3c8 0%,
+    #101925 100%
+  );
+}
+
+
+.sliderContainer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .slide {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .image_slider {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;  /* Ensures the image is fully visible, without cropping */
+    border-radius: 10px;  /* Optional for rounded corners */
+    color: wheat;
+  }
+
+  .slick-dots li button:before {
+    color: white !important;
+    
+  }
+
+  /* Remove the box-shadow */
+.btn:focus, .btn:active {
+  box-shadow: none !important;
+}
+
+
+
+
+.min-vh-150 {
+  min-height: 150vh;
+}
+
+
+.form-floating label {
+  font-size: 0.85rem;
+}
+.form-control-sm {
+  height: calc(1.5em + 0.5rem + 2px);  
+}
+
+.not_showing {
+  display: none !important;
+}
+
+.services .container .row {
+  z-index: 1;
+}
+
+
+
+
+ .app-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  max-height: 100vh;
+
+}
+
+ 
+ 
+
+.without_marker::marker {
+  content: none;
+}
+
+.language_select:focus, select:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+ 
+/* .sidebar-wrapper {
+  scrollbar-color:rgb(15, 1, 32) #939296 ;
+} */
+
+ 
+
+ 
+ .nav-item:hover {
+  background-color: #4692dd1e;
+  color: #fff;
+}
+
+
+.nav_item_active {
+  background-color: #4692dd1e;
+  color: #fff;
+}
+
+
+/* for staff forms  */
+input[readonly] {
+  background-color: #e9ecef !important; /* Light gray background */
+  cursor: not-allowed; /* Optional: change cursor to indicate readonly */
+}
+textarea[readonly] {
+  background-color: #e9ecef !important; /* Light gray background */
+  cursor: not-allowed; /* Optional: change cursor to indicate readonly */
+}
+
+
+
+
+
+ 
+
+
+
+
+.product_img_staff {
+  background-color: var(--primary-color) ;
+}
+
+
+
+.ul_staff {
+  list-style-type: none;  
+}
+
+ 
+
+ 
+ 
+.form-check-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+ 
+
+
+ .active_class {
+  background-color: transparent; /* Keep background transparent */
+  border-left: 4px solid #007bff; /* Active border on the left */
+  color: #007bff !important; /* Match the active color to the theme */
+  font-weight: bold; /* Make the active link more prominent */
+  padding-left: 1.5rem; /* Adjust padding to accommodate the border */
+  
+
+}
+ 
+.btn-flexible {
+  min-width: 120px;
+  padding: 0.5rem 1rem;
+}
+
+.disabled_link {
+  cursor: not-allowed;   /* Show the "not-allowed" cursor */
+  opacity: 0.5;
+}
+
+ 
+
+
+/* Ensure sidebar scrolling on small screens */
+.sidebar-wrapper {
+  overflow-y: auto !important; /* Allow vertical scrolling */
+  height: 100vh; /* Ensure full viewport height */
+}
+
+ .text-muted {
+  --bs-text-opacity: 1;
+  color: #dbe2e9bf !important;
+} */
+
+ .text-muted {
+--bs-text-opacity: 1 !important;
+  color: rgba(0, 0, 0, 0.5) !important;  
+}   
+
+ 
+ 
+ 
+ 
