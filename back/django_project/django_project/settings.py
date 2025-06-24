@@ -268,11 +268,17 @@ AUTH_USER_MODEL = 'usersAuthApp.UserAccount'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.view.sy'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
-EMAIL_PORT = 25
-DEFAULT_FROM_EMAIL = 'khder@view.sy'
+
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_USE_TLS = config("EMAIL_USE_TLS")
+EMAIL_USE_SSL = config("EMAIL_USE_SSL")
+EMAIL_PORT = config("EMAIL_PORT")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+
+
+
+
 
 # EMAIL_HOST_USER = 'your email address@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gmail API Key (password)'

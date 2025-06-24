@@ -144,6 +144,16 @@ class ProjectFlowSubStepSerializer(serializers.ModelSerializer):
         if obj.allowed_process_by == 'client' and obj.step.project_flow.project_user == user:
             return True
 
+        # staff can process behind client
+        if obj.allowed_process_by == 'client' and user.is_staff :
+            return True
+        # staff can process behind client
+
+
+
+
+
+
         if obj.allowed_process_by == 'any_staff' and user.is_staff:
             return True
  
@@ -202,6 +212,18 @@ class ProjectFlowSubStepSerializer(serializers.ModelSerializer):
 
         if obj.allowed_process_by == 'client' and obj.step.project_flow.project_user == user:
             return True
+
+
+        # staff can process behind client
+        if obj.allowed_process_by == 'client' and user.is_staff :
+            return True
+        # staff can process behind client
+
+
+
+
+
+
 
         if obj.allowed_process_by == 'any_staff' and user.is_staff:
             return True
@@ -348,6 +370,15 @@ class ProjectFlowStepSerializer(serializers.ModelSerializer):
         if obj.allowed_process_by == 'client' and obj.project_flow.project_user == user:
             return True
 
+
+        # staff can process behind client
+        if obj.allowed_process_by == 'client' and user.is_staff :
+            return True
+        # staff can process behind client
+
+
+
+
         if obj.allowed_process_by == 'any_staff' and user.is_staff:
             return True
 
@@ -412,6 +443,14 @@ class ProjectFlowStepSerializer(serializers.ModelSerializer):
 
         if obj.allowed_process_by == 'client' and obj.project_flow.project_user == user:
             return True
+        
+        # staff can process behind client
+        if obj.allowed_process_by == 'client' and user.is_staff :
+            return True
+        # staff can process behind client
+
+
+
 
         if obj.allowed_process_by == 'any_staff' and user.is_staff:
             return True
