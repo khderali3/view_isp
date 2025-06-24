@@ -100,15 +100,15 @@ class AboutUsSerializer(serializers.ModelSerializer):
 
 
 class FeatureWhyUsSerializer(serializers.ModelSerializer):
-   class Meta:
-    model=FeatureWhyUs
-    fields = '__all__'
+	class Meta:
+		model=FeatureWhyUs
+		fields = '__all__'
 
 
 class WhyUsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WhyUs        
-        fields = '__all__'
+	class Meta:
+		model = WhyUs        
+		fields = '__all__'
 
 
 
@@ -167,10 +167,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductSectionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductSection        
-        fields = '__all__'
-  
+	class Meta:
+		model = ProductSection        
+		fields = '__all__'
+
 
 class TimelineSerializer(serializers.Serializer):
 	home_section = HomeSectionSerializer(many=False)

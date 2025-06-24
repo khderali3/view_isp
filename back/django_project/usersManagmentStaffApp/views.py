@@ -114,91 +114,91 @@ class UserDepartmnetsView(APIView):
 
 
 class GroupPermissionView(APIView):
-    permission_classes = [IsStaffOrSuperUser, HasUserManagementPermission ]  # Only admin can assign/remove groups
+	permission_classes = [IsStaffOrSuperUser, HasUserManagementPermission ]  # Only admin can assign/remove groups
 
-    def get(self, request, group_id):
-        try:
-            group = Group.objects.get(id=group_id)
-            permissions = group.permissions.all()
-            serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
-            # return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+	def get(self, request, group_id):
+		try:
+			group = Group.objects.get(id=group_id)
+			permissions = group.permissions.all()
+			serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
+			# return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
-            return Response({
-                'group_name': group.name,
-                'permissions': serializer.data
-            }, status=status.HTTP_202_ACCEPTED)
+			return Response({
+				'group_name': group.name,
+				'permissions': serializer.data
+			}, status=status.HTTP_202_ACCEPTED)
 
 
-        except Group.DoesNotExist:
-            return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+		except Group.DoesNotExist:
+			return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
+		except Exception as e:
+			return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def post(self, request, group_id):
-        try:
-            permission_ids = request.data.getlist('permission[]', [])
-        except:
-            permission_ids = []
+	def post(self, request, group_id):
+		try:
+			permission_ids = request.data.getlist('permission[]', [])
+		except:
+			permission_ids = []
 
-        if not permission_ids:
-            try:
-                group = Group.objects.get(id=group_id)
-                group.permissions.clear()  # Clear all permissions
-                permissions = group.permissions.all()
-                serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
-                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-            except Group.DoesNotExist:
-                return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
-            except Exception as e:
-                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+		if not permission_ids:
+			try:
+				group = Group.objects.get(id=group_id)
+				group.permissions.clear()  # Clear all permissions
+				permissions = group.permissions.all()
+				serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
+				return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+			except Group.DoesNotExist:
+				return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
+			except Exception as e:
+				return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # Initialize a list for valid permission IDs
-        valid_permission_ids = []
-        for permission_id in permission_ids:
-            if permission_id:
-                valid_permission_ids.append(permission_id)
+		# Initialize a list for valid permission IDs
+		valid_permission_ids = []
+		for permission_id in permission_ids:
+			if permission_id:
+				valid_permission_ids.append(permission_id)
 
-        try:
-            # Get the group by ID
-            group = Group.objects.get(id=group_id)
-            
-            # Get the ContentType for CustomPermission model
-            custom_permission_content_type = ContentType.objects.get_for_model(CustomPermission)
-            
-            # If no valid permission IDs, clear the group's permissions
-            if not valid_permission_ids:
-                group.permissions.clear()
-                permissions = group.permissions.filter(content_type=custom_permission_content_type)
-                serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
-                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		try:
+			# Get the group by ID
+			group = Group.objects.get(id=group_id)
+			
+			# Get the ContentType for CustomPermission model
+			custom_permission_content_type = ContentType.objects.get_for_model(CustomPermission)
+			
+			# If no valid permission IDs, clear the group's permissions
+			if not valid_permission_ids:
+				group.permissions.clear()
+				permissions = group.permissions.filter(content_type=custom_permission_content_type)
+				serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
+				return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
-            # Get the permissions from valid_permission_ids that belong to the CustomPermission model
-            permissions = Permission.objects.filter(
-                id__in=valid_permission_ids,
-                content_type=custom_permission_content_type
-            )
+			# Get the permissions from valid_permission_ids that belong to the CustomPermission model
+			permissions = Permission.objects.filter(
+				id__in=valid_permission_ids,
+				content_type=custom_permission_content_type
+			)
 
-            # If no permissions are found or they don't belong to CustomPermission, return an error
-            if not permissions.exists():
-                return Response({'error': 'One or more permissions not found or do not belong to the CustomPermission model.'}, 
-                                status=status.HTTP_404_NOT_FOUND)
+			# If no permissions are found or they don't belong to CustomPermission, return an error
+			if not permissions.exists():
+				return Response({'error': 'One or more permissions not found or do not belong to the CustomPermission model.'}, 
+								status=status.HTTP_404_NOT_FOUND)
 
-            # Set the permissions for the group
-            group.permissions.set(permissions)
+			# Set the permissions for the group
+			group.permissions.set(permissions)
 
-            # Fetch the updated list of permissions for the group
-            permissions = group.permissions.filter(content_type=custom_permission_content_type)
-            serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
-            
-            # Return the updated permissions in the response
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-        
-        except Group.DoesNotExist:
-            return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
-        except Permission.DoesNotExist:
-            return Response({'error': 'One or more permissions not found.'}, status=status.HTTP_404_NOT_FOUND)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+			# Fetch the updated list of permissions for the group
+			permissions = group.permissions.filter(content_type=custom_permission_content_type)
+			serializer = AssignOrRemovePermissionSerializer(permissions, many=True)
+			
+			# Return the updated permissions in the response
+			return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+		
+		except Group.DoesNotExist:
+			return Response({'error': 'Group not found.'}, status=status.HTTP_404_NOT_FOUND)
+		except Permission.DoesNotExist:
+			return Response({'error': 'One or more permissions not found.'}, status=status.HTTP_404_NOT_FOUND)
+		except Exception as e:
+			return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 
@@ -352,32 +352,32 @@ class UserPermissionView(APIView):
 
 
 class PermissionAPIView(APIView):
- 
-    def get(self, request, pk=None):
-        """
-        Retrieve a single permission (if `pk` is provided) or list all custom permissions.
-        """
-        # Get ContentType for CustomPermission model
-        custom_permission_content_type = ContentType.objects.get_for_model(CustomPermission)
-        
-        if pk:
-            try:
-                # Retrieve a permission for the CustomPermission model
-                permission = Permission.objects.filter(content_type=custom_permission_content_type, codename=pk).first()
-                if permission:
-                    serializer = PermissionSerializer(permission)
-                    return Response(serializer.data, status=status.HTTP_200_OK)
-                else:
-                    return Response({'error': 'Permission not found or not a custom permission.'}, status=status.HTTP_404_NOT_FOUND)
-            except Permission.DoesNotExist:
-                return Response({'error': 'Permission not found or not a custom permission.'}, status=status.HTTP_404_NOT_FOUND)
-        else:
-            # List all permissions for the CustomPermission model
-            permissions = Permission.objects.filter(content_type=custom_permission_content_type)
-            serializer = PermissionSerializer(permissions, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
 
- 
+	def get(self, request, pk=None):
+		"""
+		Retrieve a single permission (if `pk` is provided) or list all custom permissions.
+		"""
+		# Get ContentType for CustomPermission model
+		custom_permission_content_type = ContentType.objects.get_for_model(CustomPermission)
+		
+		if pk:
+			try:
+				# Retrieve a permission for the CustomPermission model
+				permission = Permission.objects.filter(content_type=custom_permission_content_type, codename=pk).first()
+				if permission:
+					serializer = PermissionSerializer(permission)
+					return Response(serializer.data, status=status.HTTP_200_OK)
+				else:
+					return Response({'error': 'Permission not found or not a custom permission.'}, status=status.HTTP_404_NOT_FOUND)
+			except Permission.DoesNotExist:
+				return Response({'error': 'Permission not found or not a custom permission.'}, status=status.HTTP_404_NOT_FOUND)
+		else:
+			# List all permissions for the CustomPermission model
+			permissions = Permission.objects.filter(content_type=custom_permission_content_type)
+			serializer = PermissionSerializer(permissions, many=True)
+			return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 
 
 
