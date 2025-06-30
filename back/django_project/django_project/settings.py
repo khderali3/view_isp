@@ -37,13 +37,16 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework',
     'social_django',
+    'django_celery_beat',
     # project apps 
     'usersAuthApp',
     'staffAuthApp',
     'siteusersApp',
     'ticketSystemApp',
     'sitestaffApp',
-	'ticketSystemStaffApp',
+	# 'ticketSystemStaffApp',
+    'ticketSystemStaffApp.apps.TicketsystemstaffappConfig',  # this uses your custom AppConfig
+
 	'usersManagmentStaffApp',
     'projectFlowApp',
     'logSystemApp',
@@ -323,5 +326,10 @@ CACHES = {
     }
 }
 
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'  # Redis URL
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
  

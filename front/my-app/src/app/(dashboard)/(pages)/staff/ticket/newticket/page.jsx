@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import NewTicketUsersSearchInput from "@/app/(dashboard)/_components/jsx/tickets/new_ticket/input_search_users/page";
 
 import { useTranslations, useLocale } from "next-intl";
-
+import { getErrorMessage } from "@/app/public_utils/utils";
 
 const Page = () =>  {
 
@@ -156,6 +156,12 @@ const Page = () =>  {
           toast.error("Failed 1 to submit the request.");
 
         }
+        if (response?.error?.data?.message) {
+          toast.error(getErrorMessage(response.error.data.message));
+        } 
+
+
+
         if (response?.error?.data?.detail) {
           if(response.error.data.detail === "Permission denied for this operation."){
             if(locale === "ar") {

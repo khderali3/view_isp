@@ -25,6 +25,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from projectFlowApp.custom_app_utils import MyCustomPagination, IsStaffOrSuperUser
+
+from projectFlowApp.extra_modules.license_check.utils import license_required
+
+
+
 from django.db.models import Q
 
 
@@ -73,6 +78,7 @@ def validate_allowed_process_groups(data, field_name="allowed_process_groups"):
 class GetFullProjectFlowTemplateView(APIView):    
     permission_classes = [IsStaffOrSuperUser]
 
+    @license_required
     def get(self, request, id):
         try:
             obj = ProjectFlowTemplate.objects.get(id=id)
@@ -777,6 +783,8 @@ class StepTemplateView(APIView):
 class ProjectFlowTemplateView(APIView):
     permission_classes = [IsStaffOrSuperUser]
 
+
+    @license_required
     def get(self, request, id=None):
         if id:
             try:
@@ -820,7 +828,7 @@ class ProjectFlowTemplateView(APIView):
 
 
 
-
+    @license_required
     def post(self, request):
         serializer = CreateOrGetOrPutObjectProjectFlowTemplateSeriallizer(data=request.data, context={"request": request})
         # return Response({'message' : 'error from backend'}, status=status.HTTP_400_BAD_REQUEST)
@@ -832,7 +840,7 @@ class ProjectFlowTemplateView(APIView):
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-
+    @license_required
     def put(self, request, id):
         try:
             obj = ProjectFlowTemplate.objects.get(id=id)
@@ -847,7 +855,7 @@ class ProjectFlowTemplateView(APIView):
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
  
-
+    @license_required
     def delete(self, request, id):
         try:
             obj = ProjectFlowTemplate.objects.get(id=id)

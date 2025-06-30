@@ -11,6 +11,8 @@ from .ticketReply_views import (
 	TicketReplayStaffView, TicketReplyFileStaffView
 )
 
+from .license_view import LicenseView
+
 urlpatterns = [
 	# start ticket staff views 
     
@@ -57,6 +59,7 @@ urlpatterns = [
 
 
 
+    path('licanse/', LicenseView.as_view())
 
 
 

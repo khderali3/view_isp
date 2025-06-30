@@ -313,6 +313,42 @@ useEffect(() => {
           }
 
 
+          <ul className="nav sidebar-menu flex-column   ">
+            <li className="nav-item">
+                  <a
+                      className="nav-link"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#licenses_Managment"
+                      aria-expanded="false"
+                      role="button"
+                    >
+                      <i className="nav-icon bi bi-speedometer" />
+                      <p>
+                        {locale === 'ar' ? 'التراخيص' : 'licenses'}
+                        <i className="nav-arrow bi bi-chevron-right  " />
+                      </p>
+                  </a>
+            </li>
+
+                <ul className=" collapse nav ps-2" id="licenses_Managment" >
+
+
+
+                  <li className="nav-item text-light w-100 ">
+                    <Link href="/staff/licenses" className={` rounded text-light nav-link    ${isActive('/staff/licenses', true) ? ' active_class' : '' }     `}  >
+                    <i className= 'nav-icon bi bi-circle '  />
+                    <p>{locale === 'ar' ? 'كافة التراخيص' : 'All Licenses'}</p>
+                    </Link>
+                  </li>
+
+
+
+
+                </ul>
+
+
+
+          </ul>
 
 
 

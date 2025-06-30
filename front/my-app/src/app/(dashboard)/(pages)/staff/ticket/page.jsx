@@ -5,6 +5,7 @@ import { formatDistanceToNow, parseISO } from "date-fns";
 // import getTicketStatusColor from "../../_components/jsx/tickets/ticket_status_colors";
 import AssignTicketModal from "@/app/(dashboard)/_components/jsx/tickets/assigin_ticket/assign_ticket_modal";
 
+import { toast } from "react-toastify";
 
 
 import getTicketStatusColor from "@/app/(site)/_components/jsx/tickets/ticket_status_colors";
@@ -24,7 +25,8 @@ import { ar, enUS } from "date-fns/locale"; // Import necessary locales
 
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
-
+import { getErrorMessage } from "@/app/public_utils/utils";
+ 
 
 const Page = () => {
 
@@ -163,7 +165,11 @@ const Page = () => {
 
   
       } else {
-        console.log(response)
+          if (response?.error?.data?.message) {
+            toast.error(getErrorMessage(response.error.data.message));
+          } else {
+            console.log(response);
+          }
       }
      
     } catch (error) {

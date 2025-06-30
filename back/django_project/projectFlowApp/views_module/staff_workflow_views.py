@@ -27,10 +27,17 @@ from ..serializers_module.get_full_projectFlow.staff_get_full_project_flow impor
 from django.db import transaction
 
 from projectFlowApp.custom_app_utils import get_client_ip, IsStaffOrSuperUser, MyCustomPagination
+from projectFlowApp.extra_modules.license_check.utils import license_required
+
 
 
 
 from django.db.models import Count
+
+
+
+
+
 
 
 class ProjectFlowStatusCountAPIView(APIView):
@@ -38,6 +45,7 @@ class ProjectFlowStatusCountAPIView(APIView):
     permission_classes = [IsStaffOrSuperUser]
 
 
+    
     def get(self, request):
         all_statuses = dict(ProjectFlow.ProjectFlow_status_options)
 
@@ -71,6 +79,8 @@ class InstalledProductTypeView(APIView):
 
 
     permission_classes = [IsStaffOrSuperUser]
+
+    @license_required    
     def post(self, request):
         serializer = InstalledProductTypeSerializer(data=request.data)
         if serializer.is_valid():
@@ -78,6 +88,7 @@ class InstalledProductTypeView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    @license_required 
     def get(self, request, id=None):
         if id:
             try:
@@ -850,6 +861,7 @@ class GetFullProjectFlowView(APIView):
 
     permission_classes = [IsStaffOrSuperUser]
 
+    @license_required
     def get(self, request, id):
         try:
             obj = ProjectFlow.objects.get(id=id)
@@ -1438,7 +1450,7 @@ class ProjectFlowView(APIView):
     permission_classes = [IsStaffOrSuperUser]
 
 
-
+    @license_required
     def post(self, request):
  
 
@@ -1477,7 +1489,7 @@ class ProjectFlowView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
  
-        
+    @license_required
     def get(self, request, id=None):
         if id:
             try:
@@ -1531,7 +1543,7 @@ class ProjectFlowView(APIView):
             serializer = GetListProjectFlowSerializer(page, many=True)
             return paginator.get_paginated_response(serializer.data) 
        
-
+    @license_required
     def put(self, request, id):
         try:
             obj = ProjectFlow.objects.get(id=id)
@@ -1544,6 +1556,7 @@ class ProjectFlowView(APIView):
         except ProjectFlow.DoesNotExist:
             return Response({'message': "object not found"}, status=status.HTTP_404_NOT_FOUND)
 
+    @license_required
     def delete(self, request, id):
 
 

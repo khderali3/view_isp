@@ -1,23 +1,14 @@
 import os
 import sys
 
- 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'django_project')))
-
-# Set the Django settings module (dot notation)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
 
 import django
 django.setup()
 
 from get_machine_id import generate_machine_id
-
 from django.core.cache import cache
-
-
-
-
-
 import json
 import base64
 import hmac
@@ -27,28 +18,22 @@ from pathlib import Path
 from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
 from Crypto.Hash import SHA256
-from django.core.cache import cache
 import threading
 
-class LicenseChecker:
-    """
-    License checker with Redis cache for hourly validation,
-    and a file-based last_check (every 24h) for detecting clock rollback.
-    """
 
-    LAST_CHECK_FILE_INTERVAL = timedelta(hours=24)
-    LICENSE_CACHE_KEY = "license_check_cache"
-    LAST_CHECK_CACHE_KEY = "license_last_check_cache"
+class LicenseChecker:
+    LAST_CHECK_FILE_INTERVAL = timedelta(hours=1)
 
     def __init__(
         self,
+        app_name='ticketSystem',   # <-- app name here
         license_path='license.json',
         public_key_path='public.pem',
         last_check_path='last_license_check.json',
         hmac_secret=b'supersecretkey',
-        # cache_timeout=3600,  # seconds, 1 hour for license cache
-        cache_timeout=1,  # seconds, 1 hour for license cache
+        cache_timeout=1,  # 1 hour by default to recheck licanse
     ):
+        self.app_name = app_name
         self.license_path = Path(license_path)
         self.public_key_path = Path(public_key_path)
         self.last_check_path = Path(last_check_path)
@@ -56,11 +41,21 @@ class LicenseChecker:
         self.cache_timeout = cache_timeout
         self._lock = threading.Lock()
 
-        # Load once at init
         self._public_key = self._load_public_key()
         self._license_data, self._license_signature, self._license_json = self._load_license()
-        self.machine_id_obj = generate_machine_id() 
-  
+        self.machine_id_obj = generate_machine_id()
+
+    @property
+    def LICENSE_CACHE_KEY(self):
+        return f"{self.app_name}:license_check_cache"
+
+    @property
+    def successful_license_check_cache_key(self):
+        return f"{self.app_name}:license_valid_and_successful_last_check_cache"
+
+    @property
+    def LICENSE_FULL_INFO_CACHE_KEY(self):
+        return f"{self.app_name}:license_full_info_cache"
 
     def _generate_hmac(self, data: bytes) -> str:
         return hmac.new(self._hmac_secret, data, hashlib.sha256).hexdigest()
@@ -100,10 +95,6 @@ class LicenseChecker:
             return False
 
     def _load_last_check_file(self):
-        """
-        Load and verify last check from file.
-        Returns dict with keys: timestamp(datetime), is_valid(bool), or None if invalid.
-        """
         if not self.last_check_path.exists():
             return None
         try:
@@ -131,153 +122,146 @@ class LicenseChecker:
             with open(tmp_path, 'w') as f:
                 json.dump(wrapped, f)
             tmp_path.rename(self.last_check_path)
-        except Exception:
-            pass  # ignore errors silently
+        except Exception as e:
+            print(f"Warning: Failed to save last check file: {e}", file=sys.stderr)
 
     def _check_last_check_file(self):
-        """
-        Checks if we should reload last_check from file.
-        Uses Redis cache to store last check from file for 24h.
-        Returns cached last check data or reloads from file.
-        """
-        cached = cache.get(self.LAST_CHECK_CACHE_KEY)
+        cached = cache.get(self.successful_license_check_cache_key)
         now = datetime.now(timezone.utc)
 
         if cached:
-            # cached = {'timestamp': str, 'is_valid': bool}
             cached_ts = datetime.fromisoformat(cached['timestamp'])
             if now - cached_ts < self.LAST_CHECK_FILE_INTERVAL:
                 cached['timestamp'] = cached_ts
                 return cached
 
-        # Reload from file
         file_data = self._load_last_check_file()
         if file_data is None:
-            # No valid last check file, create new record with now and valid=True (optimistic)
             file_data = {'timestamp': now, 'is_valid': True}
 
-        # Cache it in Redis for 24h
-        cache.set(self.LAST_CHECK_CACHE_KEY, {'timestamp': file_data['timestamp'].isoformat(), 'is_valid': file_data['is_valid']}, timeout=int(self.LAST_CHECK_FILE_INTERVAL.total_seconds()))
+        cache.set(self.successful_license_check_cache_key, {
+            'timestamp': file_data['timestamp'].isoformat(),
+            'is_valid': file_data['is_valid']
+        }, timeout=int(self.LAST_CHECK_FILE_INTERVAL.total_seconds()))
         return file_data
 
+    def _build_license_response(self, is_valid, reason=None):
+        return {
+            'machine_id': self._license_data.get('machine_id'),
+            'issued_at': self._license_data.get('issued_at'),
+            'expires_at': self._license_data.get('expires_at'),
+            'license_type': self._license_data.get('license_type'),
+            'application': self._license_data.get('application'),
+            'is_valid': is_valid,
+            'reason': reason,
+        }
+
+ 
+    def _cache_license_result(self, now, license_response):
+        cache.set(self.LICENSE_CACHE_KEY, {
+            'checked_at': now.isoformat(),
+            'license_data': license_response
+        }, timeout=None)
+
+        # 🔐 Save full license info (data + signature) to cache
+        full_info = {
+            'license_data': self._license_data,
+            'signature': base64.b64encode(self._license_signature).decode(),
+            'machine_id': self.machine_id_obj,
+        }
+        cache.set(self.LICENSE_FULL_INFO_CACHE_KEY, full_info, timeout=None)  # No timeout
+
+
+
     def check_license(self):
-        """
-        Main license check, using Redis cache for hourly license validity,
-        and file-based last_check for 24h clock rollback detection.
-        """
         with self._lock:
             now = datetime.now(timezone.utc)
 
-            # First check Redis cache for license status (valid + last check time)
             cached_result = cache.get(self.LICENSE_CACHE_KEY)
+
+            # check server time changed from cache
             if cached_result:
                 cached_time = datetime.fromisoformat(cached_result['checked_at'])
-                # If within 1 hour cache, return cached result directly
                 if now - cached_time < timedelta(seconds=self.cache_timeout):
-                    # Check for clock rollback by comparing with last_check file data
                     last_check = self._check_last_check_file()
                     if now < last_check['timestamp']:
-                        # Clock rollback detected
-                        return {
-                            'is_valid': False,
-                            'reason': 'System clock rollback detected - license invalidated',
-                            **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')}
-                        }
-                    # Return cached license result
+
+                        license_response = self._build_license_response(False,
+                              'System clock rollback detected - license invalidated',
+                            )
+
+                        self._cache_license_result(now, license_response)
+                        return license_response
                     return cached_result['license_data']
 
-            # No valid cache or expired - do full check now
-
-            # Verify license signature
             if not self._verify_signature():
-                # Save last check file as invalid now
                 self._save_last_check_file(now, False)
-                cache.set(self.LICENSE_CACHE_KEY, {
-                    'checked_at': now.isoformat(),
-                    'license_data': {
-                        **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')},
-                        'is_valid': False,
-                        'reason': 'Invalid license signature'
-                    }
-                }, timeout=self.cache_timeout)
-                return cache.get(self.LICENSE_CACHE_KEY)['license_data']
+                license_response = self._build_license_response(False,
+                        'Invalid license signature',
+                    )
+                self._cache_license_result(now, license_response)
+                return license_response
 
-            # Check expiration dates
             try:
                 expires_at = datetime.strptime(self._license_data['expires_at'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
                 issued_at = datetime.strptime(self._license_data['issued_at'], '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
             except Exception:
                 self._save_last_check_file(now, False)
-                return {
-                    **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')},
-                    'is_valid': False,
-                    'reason': 'Invalid license date format'
-                }
+                license_response = self._build_license_response(False,
+                        'Invalid license date format'
+                    )
+
+                self._cache_license_result(now, license_response)
+                return license_response
 
             if expires_at < now:
                 self._save_last_check_file(now, False)
-                return {
-                    **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')},
-                    'is_valid': False,
-                    'reason': 'License expired'
-                }
 
-            # Check clock rollback with last_check file
+                license_response = self._build_license_response(False,
+                       'License expired'
+                    )
+                self._cache_license_result(now, license_response)
+                return license_response
+
             last_check = self._check_last_check_file()
             if now < last_check['timestamp']:
-                return {
-                    **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')},
-                    'is_valid': False,
-                    'reason': 'System clock rollback detected - license invalidated'
-                }
+                self._save_last_check_file(now, False)
+                license_response = self._build_license_response(False,
+                       'System clock rollback detected - license invalidated'
+                    )
+                self._cache_license_result(now, license_response)
+                return license_response
 
-
-            # add by khder
             if self._license_data['machine_id'] != self.machine_id_obj['machine_id']:
-                return {
-                    **{k: None for k in ('machine_id','issued_at','expires_at','license_type','application')},
-                    'is_valid': False,
-                    'reason': 'machine_id not valid'
-                }
+                self._save_last_check_file(now, False)
 
-            # end add by khder
+                license_response = self._build_license_response(False,
+                       'machine_id not valid'
+                    )
 
+                self._cache_license_result(now, license_response)
+                return license_response
 
- 
-
-            # License is valid, save last check file and Redis cache
             self._save_last_check_file(now, True)
+ 
+            license_response = self._build_license_response(True)
 
-            license_response = {
-                **self._license_data,
-                'is_valid': True,
-                'reason': None,
-            }
 
-            cache.set(self.LICENSE_CACHE_KEY, {
-                'checked_at': now.isoformat(),
-                'license_data': license_response
-            }, timeout=self.cache_timeout)
+            self._cache_license_result(now, license_response)
 
-            # Also update last check Redis cache
-            cache.set(self.LAST_CHECK_CACHE_KEY, {'timestamp': now.isoformat(), 'is_valid': True}, timeout=int(self.LAST_CHECK_FILE_INTERVAL.total_seconds()))
+            cache.set(self.successful_license_check_cache_key, {
+                'timestamp': now.isoformat(),
+                'is_valid': True
+            }, timeout=int(self.LAST_CHECK_FILE_INTERVAL.total_seconds()))
 
             return license_response
 
+
  
-
-from datetime import datetime
-
 if __name__ == "__main__":
     start_time = datetime.now()
     print("License check started at:", start_time)
 
-    checker = LicenseChecker()
+    checker = LicenseChecker()  # default app_name = "ticketSystem"
     result = checker.check_license()
-    print(result)
-
-    end_time = datetime.now()
-    print("License check ended at:", end_time)
-
-    duration = end_time - start_time
-    print("Duration:", duration)
+    print("License check result:", result)

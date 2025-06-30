@@ -12,7 +12,7 @@ import staff_nav from './main_directory_translations/en/dashboard/staff_nav';
 import account_staff from './main_directory_translations/en/dashboard/account';
 import projectFlow from './main_directory_translations/en/dashboard/projectFlow'
 import logs from "./main_directory_translations/en/dashboard/logs"
-
+import licenses from "./main_directory_translations/en/dashboard/licenses"
 
 export default {
 
@@ -106,6 +106,7 @@ export default {
 		nav : staff_nav,
 		projectFlow,
 		logs,
-		
+		licenses,
+	
 	}
 }

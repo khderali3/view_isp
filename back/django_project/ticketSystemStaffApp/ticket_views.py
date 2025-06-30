@@ -17,7 +17,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.db.models import BooleanField, Case, Value, When
 
-from .my_utils import IsStaffOrSuperUser, HasUserManagementPermission
+from .my_utils import IsStaffOrSuperUser, HasUserManagementPermission, license_required
 
 
 
@@ -58,6 +58,8 @@ class TicketStatusCountAPIView(APIView):
 class AssignTicketToMeStaffView(APIView):
 	permission_classes = [IsStaffOrSuperUser]
 
+
+	@license_required
 	def post(self, request, ticket_id, *args, **kwargs):
 		try:
 			ticket = Ticket.objects.get(id=ticket_id)
@@ -98,6 +100,7 @@ class AssignReassignTicketStaffView(APIView):
 class CloseTicketStaffView(APIView):
 	permission_classes = [IsStaffOrSuperUser]
 
+	@license_required
 	def post(self, request, ticket_id, *args, **kwargs):
 		# Get the ticket
 		ticket = get_object_or_404(Ticket, id=ticket_id)
@@ -125,6 +128,7 @@ class CloseTicketStaffView(APIView):
 class ReopenTicketStaffView(APIView):
 	permission_classes = [IsStaffOrSuperUser]
 
+	@license_required
 	def post(self, request, ticket_id, *args, **kwargs):
 		# Get the ticket
 		ticket = get_object_or_404(Ticket, id=ticket_id)
@@ -267,6 +271,9 @@ class GetTicketByIdStaff(APIView):
 class TicketStaffView(APIView):
 	permission_classes = [IsStaffOrSuperUser]
 
+
+
+	@license_required
 	def post(self, request, *args, **kwargs):
 		if not request.user.is_superuser and not request.user.has_perm('usersAuthApp.ticket_create_behalf_client'):
 			return Response({"detail": "Permission denied for this operation."}, status=status.HTTP_403_FORBIDDEN)
@@ -281,6 +288,7 @@ class TicketStaffView(APIView):
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
+	@license_required
 	def put(self, request, *args, **kwargs):
 			
 			if not request.user.is_superuser and not request.user.has_perm('usersAuthApp.ticket_change'):
@@ -298,6 +306,7 @@ class TicketStaffView(APIView):
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+	@license_required
 	def delete(self, request, *args, **kwargs):
 			ticket_id = kwargs.get('id')
 
@@ -312,7 +321,7 @@ class TicketStaffView(APIView):
 			return Response({"detail": "ticket deleted successfully."}, status=status.HTTP_202_ACCEPTED)
 	
 
-
+	@license_required
 	def get(self, request, *args, **kwargs):
 			ticket_id = kwargs.get('id')
 			if ticket_id:

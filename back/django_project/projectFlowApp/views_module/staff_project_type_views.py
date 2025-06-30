@@ -7,11 +7,11 @@ from rest_framework.views import status
 from ..serializers_module.staff_serializer_project_type import ProjectTypeSerializer, ProjectTypeExtraImagesSerializer, ProjectTypeAttachmentSerializer, GetListProjectTypeSerializer
 from ..models.project_type_models import ProjectType, ProjectTypeExtraImages, ProjectTypeAttachment
 
-
-
+ 
 
 from projectFlowApp.custom_app_utils import  IsStaffOrSuperUser
 
+from projectFlowApp.extra_modules.license_check.utils import license_required
 
 
 class ProjectTypeAttachmentView(APIView):
@@ -133,7 +133,8 @@ class ProjectTypeExtraImagesView(APIView):
 
 class ProjectTypeView(APIView):
     permission_classes = [IsStaffOrSuperUser]
-
+    
+    @license_required
     def post(self, request):
 
         serializer = ProjectTypeSerializer(data=request.data, context={'request': request})
@@ -143,7 +144,7 @@ class ProjectTypeView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-
+    @license_required
     def get(self, request, project_type=None):
  
 
@@ -168,7 +169,7 @@ class ProjectTypeView(APIView):
 
 
 
-
+    @license_required
     def put(self, request, project_type):
         try:
             obj = ProjectType.objects.get(id=project_type)
@@ -184,7 +185,7 @@ class ProjectTypeView(APIView):
             return Response({'message' : str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+    @license_required
     def delete(self, request, project_type):
  
         try:

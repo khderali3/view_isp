@@ -3,16 +3,17 @@ from .my_serializers import (
 	) 
 
 from rest_framework.response import Response
-from .my_utils import IsStaffOrSuperUser
+from .my_utils import IsStaffOrSuperUser, license_required
 from rest_framework.views import APIView
 from rest_framework import status
 from ticketSystemApp.models import (TicketReplay, TicketReplyFiles)
 from django.shortcuts import get_object_or_404
-
+ 
 
 class TicketReplayStaffView(APIView):
 	permission_classes = [IsStaffOrSuperUser]
       
+	@license_required
 	def delete(self, request, *args, **kwargs):
 			ticket_reply_id = kwargs.get('id')  # Get the ID from the URL
 
@@ -30,6 +31,7 @@ class TicketReplayStaffView(APIView):
 			return Response({"error": "Ticket Reply ID is required."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+	@license_required
 	def post(self, request, *args, **kwargs):
 
 		serializer = CreateTicketReplayStaffSerializer(data=request.data, context={'request': request})
@@ -40,6 +42,7 @@ class TicketReplayStaffView(APIView):
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+	@license_required
 	def get(self, request, *args, **kwargs):
 			ticket_reply_id = kwargs.get('id')
 			if ticket_reply_id:
@@ -50,7 +53,7 @@ class TicketReplayStaffView(APIView):
 			return Response({"error": "Ticket Reply ID is required."}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
+	@license_required
 	def put(self , request, *args, **kwargs):
 		ticket_reply_id = kwargs.get('id')
 
@@ -85,6 +88,8 @@ class TicketReplayStaffView(APIView):
 
 
 class TicketReplyFileStaffView(APIView):
+
+	@license_required
 	def get(self, request, ticket_reply_id, *args, **kwargs):
 		"""
 		Get all files related to a specific ticket
@@ -105,7 +110,7 @@ class TicketReplyFileStaffView(APIView):
 
 	# 	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+	@license_required
 	def delete(self, request, file_id, *args, **kwargs):
 		"""
 		Delete a file by its file_id

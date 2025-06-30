@@ -33,7 +33,7 @@ import { useTranslations, useLocale } from "next-intl";
 
 import { ar, enUS } from "date-fns/locale"; // Import necessary locales
 
-
+import { getErrorMessage } from "@/app/public_utils/utils";
  
 
 
@@ -183,6 +183,8 @@ const Page = () => {
              toast.error('error1 to delete item ')
             //  throw new Error('404');  // This will trigger the custom 404 page
 
+ 
+
             if (response?.error?.data?.detail) {
 				if(response.error.data.detail === "Permission denied for this operation."){
 					if(locale === "ar") {
@@ -221,8 +223,27 @@ const Page = () => {
             console.log('data', response.data)
 
           } else {
-             console.log(response) 
-            router.push('/404')
+ 
+
+            // if (response?.error?.data?.message) {
+            // toast.error(getErrorMessage(response.error.data.message));
+            // } 
+            // console.log(response) 
+            // router.push('/404')
+
+
+
+            if (response.error.status === 404) {
+                router.push('/404'); // Redirect to custom 404 page
+            } else if (response.error.data?.message) {
+                if(response.error.data.message === "License invalid: License expired"){
+                     router.push("/staff/ticket/")
+                }
+            } else{
+                  toast.error(getErrorMessage(response.error.data))
+            }
+
+
 
             }
 

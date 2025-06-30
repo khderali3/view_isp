@@ -25,6 +25,19 @@ def generate_license(machine_id, valid_days=365, license_type='standard'):
         'application' : "CloudTechSKy Ticket System"
     }
 
+    # Specific test dates (UTC)
+    # issued_at_test = datetime(2024, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+    # expires_at_test = datetime(2025, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
+
+    # license_data = {
+    #     'machine_id': machine_id,
+    #     'issued_at': issued_at_test.strftime('%Y-%m-%dT%H:%M:%SZ'),
+    #     'expires_at': expires_at_test.strftime('%Y-%m-%dT%H:%M:%SZ'),
+    #     'license_type': license_type,
+    #     'application': "CloudTechSKy Ticket System"
+    # }
+
+
     # Convert license data to JSON string (sorted keys for consistent signature)
     license_json = json.dumps(license_data, sort_keys=True).encode('utf-8')
 
