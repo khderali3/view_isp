@@ -1,14 +1,14 @@
 {
     "license": {
-        "license_id": "092a990f-55d6-11f0-aec1-f58da2afa778",
-        "device_app_fingerprint": "e054c7036229d75b06de66c13a91cc29a5e2e94c9274832800a861aa9d8389f7",
-        "issued_at": "2025-06-30T17:17:01Z",
-        "expires_at": "2026-06-30T17:17:01Z",
+        "license_id": "fa8d0c33-568a-11f0-b5fa-ec3b2de7d03c",
+        "device_app_fingerprint": "ba09161438c1436d40ef795e5ca85c95e6262813c7ae213a355b8ef4c97b5862",
+        "issued_at": "2025-07-01T14:52:15Z",
+        "expires_at": "2026-07-01T14:52:15Z",
         "license_type": "pro",
-        "application": "CloudTechSKy Tickting System",
-        "app_Name_id": "ticketSystem",
-        "app_installation_id": "979f655c-f82a-480c-8837-f3edc7da0504",
+        "application": "CloudTechSKy ProjectFlow System",
+        "app_Name_id": "projectFlowApp",
+        "app_installation_id": "b23e90b7-78bc-4972-9cca-947b3e47f4dc",
         "issued_to": "View ISP Company"
     },
-    "signature": "AcSWA1eSRt7eT2lCvrFVVIE+Vi2HhRczM8SQJV4bFDZ9Kc+Lmi/Fsqhloksei2F9xOcNrLSrFv/BiUkYp7oRihgDl/1nbfZnFHjCxy5XXYSfIvNVFOlXOiVl5FH+A1SNdwSGaBXHiF+YMkHbBdyMRC5Lgak5OPwIfFACqwkYYImJknCjXb9yiuvxJYYVh23XH2pV4IUcovyW1MFz9QDx1Su3UdZQWXzVKntG38Xpk/EwFyl9Uqq2OKNIRvdCxqopFzQnZ5Bq7pj+UaEfNYGWhX8wG5L5a7hkFGsSwFhbs1gwsiJV6glRxYXXnxaE9W2Ca53w35s2e77XTI0mK2HUDw=="
+    "signature": "QK0G5A2Ys4+4GaNp+1zRfWPsaxe+lqTXnvSFY7YCE/FedHtyK1vuB7Z7CfRXzUpNKoK49uf8IVCAU1btE1QqRGiJRvsSll2NDvcZUPgwQx/gD5L/fo6Y1v9pUGE41lZMyEB/3qNc4VYX8JlCIRDncrymstFNsx1zRqx0x07c6dYI9oMlpHT96kNUeOZW7r4rX30aVifyVB7geL2QaJtlg6VrDQxdVRnjdkUasfx9didVQsLJDATcGuRxLmky0ew4OmkfSc+sPL+VA4PnDpio2UiYSBJNH9D1d+il4JuTugAzhl26tKOk9KUr/1hgHZot4HXakADznfQTxTfwmBLCnQ=="
 }

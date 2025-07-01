@@ -20,7 +20,7 @@ class TicketsystemstaffappConfig(AppConfig):
         # Generate installation ID with dynamic app name
         from ticketSystemStaffApp.extra_modules.license_check.utils import get_or_create_installation_info
         installation_info = get_or_create_installation_info("ticketSystem")
-        print(f"Installation info,  App Name Id is : {installation_info.get('app_name')}, app installation ID is: {installation_info.get('installation_id')}")
+        # print(f"Installation info,  App Name Id is : {installation_info.get('app_name')}, app installation ID is: {installation_info.get('installation_id')}")
         # end create app id
  
 
@@ -29,17 +29,17 @@ class TicketsystemstaffappConfig(AppConfig):
             checker = LicenseChecker()
 
             result = checker.check_license()
-            print(result)
+            # print(result)
 
             if not result:
                 raise ImproperlyConfigured("License check failed: No result returned.")
             
         except Exception as e:
-            print(f"❌ License check error: {e}")
+            # print(f"❌ License check error: {e}")
             raise  # re-raise to prevent app startup
         try:
             cached = cache.get(cache_key)
-            print('the cached key resule is :', cached)
+            # print('the cached key resule is :', cached)
         except Exception as e:
             # Redis connection error or cache backend error
             raise ImproperlyConfigured(f"License check error: Redis cache not accessible: {e}")

@@ -15,6 +15,11 @@ import { DeleteButton } from "./delete_project";
 
 import Link from "next/link";
 
+import { getErrorMessage } from "@/app/public_utils/utils";
+
+
+
+
 export default function ListManagerProjectType() {
 
 
@@ -81,6 +86,16 @@ const fetchData = async (pageUrl) => {
  	  if( response && response.data) {
 		setdata(response.data)
 	  }
+	  else {  
+
+		if (response?.error?.data?.message) {
+			toast.error(getErrorMessage(response.error.data.message));
+		} else {
+			console.log(response);
+		}
+
+
+	 }
 
 	} catch (error) {
 	  console.error("Error fetching data:", error);

@@ -20,7 +20,7 @@ export default {
 		ip_address: "IP Address",
 		staff : "Staff",
 		
-		pwa_prompt_msg : "Install CloudTechSky App on your device for a better experience.",
+		pwa_prompt_msg : "Install View ISP App on your device for a better experience.",
 		pwa_prompt_btn_install : "Install",
 		pwa_prompt_btn_Dismiss : "Dismiss",
 

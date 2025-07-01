@@ -23,7 +23,7 @@ export default {
 
 		staff : "فريق العمل",
 
-		pwa_prompt_msg : "قم بتنصيب تطبيق كلاود تك سكاي على جهازك لأداء أفضل.",
+		pwa_prompt_msg : "قم بتنصيب تطبيق مزود خدمة الانترنت فيو على جهازك لأداء أفضل.",
 		pwa_prompt_btn_install : "تنصيب",
 		pwa_prompt_btn_Dismiss : "رفض",
 	

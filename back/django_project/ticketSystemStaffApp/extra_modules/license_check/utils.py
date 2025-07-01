@@ -8,13 +8,20 @@ from django.core.cache import cache
 from rest_framework.response import Response
 from rest_framework import status
 
-
-
-
+ 
+import glob
 
 def get_or_create_installation_info(app_name):
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    install_file_path = os.path.join(current_dir, 'install.py')
+    
+    # Try to find compiled install module first (.so or .pyd)
+    compiled_modules = glob.glob(os.path.join(current_dir, 'install.*.so')) + glob.glob(os.path.join(current_dir, 'install.*.pyd'))
+    
+    if compiled_modules:
+        install_file_path = compiled_modules[0]
+    else:
+        # fallback to .py file
+        install_file_path = os.path.join(current_dir, 'install.py')
 
     if os.path.exists(install_file_path):
         try:
@@ -36,13 +43,52 @@ def get_or_create_installation_info(app_name):
         f'APP_NAME = "{app_name}"\n'
     )
 
-    with open(install_file_path, 'w') as f:
+    with open(os.path.join(current_dir, 'install.py'), 'w') as f:
         f.write(content)
 
     return {
         'installation_id': installation_id,
         'app_name': app_name
     }
+
+
+
+
+
+
+
+
+# def get_or_create_installation_info(app_name):
+#     current_dir = os.path.dirname(os.path.abspath(__file__))
+#     install_file_path = os.path.join(current_dir, 'install.py')
+
+#     if os.path.exists(install_file_path):
+#         try:
+#             spec = importlib.util.spec_from_file_location("install", install_file_path)
+#             install = importlib.util.module_from_spec(spec)
+#             spec.loader.exec_module(install)
+#             return {
+#                 'installation_id': install.INSTALLATION_ID,
+#                 'app_name': install.APP_NAME
+#             }
+#         except Exception:
+#             pass  # Fall through to regenerate
+
+#     # Generate new values and write them to install.py
+#     installation_id = str(uuid.uuid4())
+#     content = (
+#         f'# Auto-generated installation info\n'
+#         f'INSTALLATION_ID = "{installation_id}"\n'
+#         f'APP_NAME = "{app_name}"\n'
+#     )
+
+#     with open(install_file_path, 'w') as f:
+#         f.write(content)
+
+#     return {
+#         'installation_id': installation_id,
+#         'app_name': app_name
+#     }
 
 
 

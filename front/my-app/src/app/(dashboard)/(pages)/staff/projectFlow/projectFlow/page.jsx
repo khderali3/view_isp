@@ -12,8 +12,8 @@ import { useCustomFetchMutation } from "@/app/(dashboard)/_components/redux_staf
 
 import { useRef } from "react";
 
- 
- 
+import { toast } from "react-toastify";
+import { getErrorMessage } from "@/app/public_utils/utils"; 
 import { useLocale, useTranslations } from "next-intl";
 import { ar, enUS } from "date-fns/locale"; // Import necessary locales
 import UsersSearchInputGlopal from "@/app/(dashboard)/_components/jsx/input_search_users/page";
@@ -96,9 +96,7 @@ const Page = () => {
   }, [statusFromQuery]);
 
 
-
-
-
+ 
 
   const [userId, setUserId] = useState('all');  
   const [projectId, setProjectId] = useState('');   
@@ -167,6 +165,15 @@ const Page = () => {
   
       } else {
         console.log(response)
+
+           if (response?.error?.data?.message) {
+             toast.error(getErrorMessage(response.error.data.message));
+           } else {
+             console.log(response);
+           }
+ 
+
+
       }
      
     } catch (error) {

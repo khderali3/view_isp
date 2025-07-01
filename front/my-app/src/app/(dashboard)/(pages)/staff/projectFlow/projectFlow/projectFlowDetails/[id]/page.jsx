@@ -187,8 +187,21 @@ const Page = () => {
             console.log('data', response.data)
 
           } else {
-                console.log(response) 
-                router.push('/404')
+                console.log('err', response) 
+                // router.push('/404')
+
+            if (response?.error?.status === 404) {
+                router.push('/404'); // Redirect to custom 404 page
+            } else if (response?.error?.data?.message) {
+                if (response?.error?.data?.message.startsWith("License invalid:")){
+                     router.push("/staff/projectFlow/projectFlow/")
+                }
+            } else{
+                  toast.error(getErrorMessage(response.error.data))
+            }
+
+ 
+
             }
 
         } catch (error) {

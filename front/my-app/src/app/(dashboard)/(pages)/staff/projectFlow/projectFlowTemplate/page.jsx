@@ -18,6 +18,11 @@ import { ar, enUS } from "date-fns/locale"; // Import necessary locales
 import { useTrueFalseLabel, useStepsProcessStrategy, useManualStartMode } from "@/app/public_utils/hooks";
  
 
+import { toast } from "react-toastify";
+import { getErrorMessage } from "@/app/public_utils/utils";
+ 
+
+
 const Page = () => {
   const getTrueFalseLabel = useTrueFalseLabel()
   const getStepsProcessStrategy = useStepsProcessStrategy()
@@ -111,6 +116,15 @@ const Page = () => {
   
       } else {
         console.log(response)
+
+
+           if (response?.error?.data?.message) {
+             toast.error(getErrorMessage(response.error.data.message));
+           } else {
+             console.log(response);
+           }
+
+
       }
      
     } catch (error) {

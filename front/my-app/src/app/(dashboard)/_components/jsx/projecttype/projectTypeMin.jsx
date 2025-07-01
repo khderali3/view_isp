@@ -102,6 +102,11 @@ const ProjectTypeSection = () => {
           } 
         } else {
           toast.error(JSON.stringify(response?.error?.data));
+
+
+
+
+          
         }
 
 			}
@@ -113,6 +118,10 @@ const ProjectTypeSection = () => {
 
       } else {
         toast.error("Error submitting form2.");
+
+
+
+
 
       }
 		  }finally{setSubmitting(false)}
