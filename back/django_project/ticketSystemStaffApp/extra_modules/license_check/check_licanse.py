@@ -282,6 +282,7 @@ class LicenseChecker:
 
  
 if __name__ == "__main__":
+
     import django
     django.setup()
     start_time = datetime.now()

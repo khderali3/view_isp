@@ -25,12 +25,12 @@ class Log(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     action_type = models.CharField(max_length=6, choices=ACTION_TYPES)
     model_name = models.CharField(max_length=255)
-    # object_id = models.PositiveIntegerField()
-
     object_id = models.CharField(max_length=100) 
-
     object_description = models.CharField(max_length=255)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)
+
+ 
+
     changes = models.JSONField(null=True, blank=True)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
 
@@ -40,3 +40,24 @@ class Log(models.Model):
 
     class Meta:
         ordering = ['-id']   
+
+
+
+
+
+
+class ErrorLog(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True, db_index=True)  # Add db_index=True here
+    level = models.CharField(max_length=15 , null=True, blank=True)
+    request_method = models.CharField(max_length=15 , null=True, blank=True)
+    request_path = models.CharField(max_length=2048, null=True, blank=True)
+    message = models.TextField()
+    traceback = models.TextField(null=True, blank=True)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"[{self.level}] {self.message[:50]}..."

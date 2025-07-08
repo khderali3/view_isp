@@ -15,6 +15,7 @@ const Nav = () => {
   const locale = useLocale()
   const t = useTranslations("dashboard.nav")
   
+  const defaultImage = `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAswMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQIDBAUH/8QALBABAAICAAUDAgUFAAAAAAAAAAECAxEEEjFBUSEycZGhEyJSYbEUIzNCgf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+4gAAAAAAAAiZ13BIrzx5OevkFhEWiZ9JhIAAAAAAAAAAAAAAAAClrxHyre+/SOigLTaZ+PCoAAAJiZjogBpGTtZeJjswTW01BuIrMTHokAAAAAAAAAABlktv0jovedV/diAAACJmIjczqPIJGFuKpHtibfZEcVH6J+oOgUx5KXj8s7nvC4AAJrPLO20TtgvjtqdA1AAAAAAAABEzqJBled2VAAAETOomZ6Q4cuT8S2+3aHTxVtY4iO8uMABUTE6ncdXbhy/iV9fdHVwtuFtrLEdpRXYAAADes7hLPHPZoAAAAAAArf2yspk9sgyAAABz8X7K/LldvE158Xp2nbiUABBpg/y1+Wbbha82XfgHYAigAL4vdLVjj9zYAAAAAABW3SVgHOExqdAAADjz4ZrO6xM1/h2Im0R1mI+ZB5w7bUw268v/JRGLDHj6g5aUm86rDux0jHXlj6kTSI1E1j4lYAAAAF8XWWqmONVXAAAAAAAABnkjuzbzG40xtHLOgQplyRjruevaPK8zqJmekPPyXnJabSC2TNfJ1nUeIZgqGjQAajwmtppO6zqUAOvDxHPPLedW7T5bvNdvD358fr1j0RWqaxM2iOyGuOuo35BcAAAAAAAAABW1eaFgHHxO64rbcL18uOuWvLbo87Nw98XrPrXzCjEOwIAAAAN+En+5MeYZY6WyW1SJl38NwsYvzWndv4BpSneerUEUAAAAAAAAAAAAABhl4XFkneuW3mGF+Bt/peJ+YdwDzP6TN4ifiSOEzfp+70wHnV4LJPWax92+Pgsce+Zs6gEVrFY1WIiP2SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//Z`
 
   useEffect(() => {
     // Function to check if the screen is small (sm or below)
@@ -34,7 +35,7 @@ const Nav = () => {
     };
   }, []);
 
-
+ 
 
   useEffect(() => {
     // Only add the outside click handler if the screen is small
@@ -116,27 +117,52 @@ const Nav = () => {
 
             <span className="d-none d-md-inline">{t('hello')}, {loginFirstName}</span>{" "}
 
-              <img
+              {/* <img
                 // src="/Images/user2-160x160.jpg"
                 src={profileImage ? profileImage : "/Images/def_prof_image.jpg"}
 
                 className="user-image rounded-circle shadow"
                 alt="User Image"
-              />{" "}
+              />  */}
+
+              <img
+                src={profileImage || defaultImage}
+                onError={(e) => {
+                  e.target.onerror = null; // Prevent infinite loop in case default image also fails
+                  e.target.src = defaultImage;
+                }}
+                alt="User Image"
+                className="user-image rounded-circle shadow"
+              />
+
+
+
+
+
+
             </a>
 
             <ul className={`dropdown-menu dropdown-menu-lg   ${locale === "ar" ? 'dropdown-menu-start' : 'dropdown-menu-end'}`}>
  
 
               <li className="user-header text-bg-primary">
-                <img
-                  // src="/Images/user2-160x160.jpg"
-                  // src="/Images/def_prof_image.jpg"
-                  src={profileImage ? profileImage : "/Images/def_prof_image.jpg"}
 
-                  className="rounded-circle shadow"
+
+                <img
+                  src={profileImage || defaultImage}
+                  onError={(e) => {
+                    e.target.onerror = null; // Prevent infinite loop in case default image also fails
+                    e.target.src = defaultImage;
+                  }}
                   alt="User Image"
+                  className="rounded-circle shadow"
                 />
+
+
+
+
+
+
                 <p>
                   {loginFirstName}
                   <small>{t('staff')}</small>

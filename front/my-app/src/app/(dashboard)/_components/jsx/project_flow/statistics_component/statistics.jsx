@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useCustomFetchMutation } from "@/app/(dashboard)/_components/redux_staff/features/authApiSlice";
-
-
 import Link from "next/link";
 
 import { useLocale } from "next-intl";

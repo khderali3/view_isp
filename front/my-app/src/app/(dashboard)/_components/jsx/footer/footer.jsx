@@ -14,10 +14,10 @@ const Footer = async () => {
           {/* For ICT  */}
           {locale === "ar" ? "لتكنولوجيا الإتصالات والمعلومات" : 'For ICT'}
         </div> 
-        <strong className="pe-2">
-        {locale === "ar" ? "© 2024 حقوق الطبع والنشر " : 'Copyright © 2024'}
+        <strong className="px-2">
+        {locale === "ar" ? "© 2020 حقوق الطبع والنشر " : 'Copyright © 2020'}
           {/* Copyright © 2024 &nbsp; */}
-          <a href="http://cloudtech-it.com" className="text-decoration-none ">
+          <a href="http://cloudtech-it.com" className="text-decoration-none px-2">
             CloudTech Sky
           </a>
           .

@@ -8,6 +8,9 @@ import { toast } from "react-toastify"
 import { useLocale, useTranslations } from "next-intl"
 import { setprofileImage } from "@/app/(dashboard)/_components/redux_staff/features/authSlice"
 
+import { useDispatch } from "react-redux"
+
+
 const Page = () =>{
 
 	const fileInputRef = useRef(null);
@@ -17,6 +20,8 @@ const Page = () =>{
 	const [canEdit, setCanEdit] = useState(false)
 	const [isObjUpdateing, setIsObjUpdateing] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+	const dispatch = useDispatch()
+	
 	const [data, setData] = useState({
 		first_name: "",
 		last_name: "",
@@ -90,11 +95,12 @@ const Page = () =>{
 
 		}
 
-		// dispatch(setprofileImage(response?.data?.PRF_image))
+		dispatch(setprofileImage(response?.data?.PRF_image))
 		setPRF_image_delete(false)
 		fileInputRef.current.value = ""
+ 
 		fetchData(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/staff/auth/profile/`)
-
+		console.log('response.data', response.data.PRF_image)
 
 	  } else{
 		console.log(response)

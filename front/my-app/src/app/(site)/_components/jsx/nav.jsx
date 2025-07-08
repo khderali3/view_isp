@@ -36,7 +36,10 @@ export const Nav =  () => {
   <nav className="navbar navbar-expand-lg background-color sticky-top"  dir="ltr" >
     <div className="container-fluid">
       <a className="navbar-brand" href="#">
-        <img src="/Images/view_logo.png" alt="Company Logo" />
+        <img 
+        src="/Images/view_logo.png" 
+        
+        alt="Company Logo" />
 
 
 

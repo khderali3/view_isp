@@ -1,8 +1,11 @@
 back/myenv_39/
 back/django_project/db.sqlite3
 back/django_project/.env
+back/django_project/.env*
 compiled_django_project
 
 
 front/my_app/node_modules
 front/my_app/.env*
+front/my-app/node_modules
+front/my-app/.env*

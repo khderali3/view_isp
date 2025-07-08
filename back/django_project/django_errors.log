@@ -1,0 +1,217 @@
+[2025-07-07 13:50:38] ERROR custom_loger Profile image file missing: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 13:50:38] ERROR custom_loger Profile image file missing: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 13:51:24] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/6/ | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 99, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 107, in save
+    raise e
+NameError: name 'rise' is not defined
+[2025-07-07 13:52:29] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/6/ | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 99, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+[2025-07-07 14:04:33] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 14:04:33] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 14:05:42] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/6/ | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 112, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+[2025-07-07 17:10:35] ERROR django.request Internal Server Error: /api/staff/log/error_logs/ | Method: N/A | Path: N/A | User: Anonymous | IP: N/A
+########
+[2025-07-07 17:43:10] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/63/ | Method: PUT | Path: /api/staff/usersmanagment/users/63/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 112, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+[2025-07-07 19:36:09] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/6/ | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 112, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+[2025-07-07 19:36:18] ERROR django.request Internal Server Error: /api/staff/usersmanagment/users/6/ | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+Traceback (most recent call last):
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersManagmentStaffApp/views.py", line 565, in put
+    profile_obj, created = Profile.objects.update_or_create(PRF_user=user)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/django/db/models/query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "/mnt/disk2/programing_proejects/view_isp/back/django_project/usersAuthApp/models.py", line 112, in save
+    img = Image.open(self.PRF_image.path)
+  File "/mnt/disk2/programing_proejects/view_isp/back/myenv_39/lib/python3.9/site-packages/PIL/Image.py", line 3469, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg'
+[2025-07-07 19:37:21] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:37:21] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:37:27] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:37:28] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:37:32] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:37:33] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/ISP.jpg' | Method: PUT | Path: /api/staff/usersmanagment/users/6/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:39:33] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/images.jpeg' | Method: PUT | Path: /api/staff/usersmanagment/users/7/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:39:34] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/images.jpeg' | Method: PUT | Path: /api/staff/usersmanagment/users/7/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:39:38] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/images.jpeg' | Method: PUT | Path: /api/staff/usersmanagment/users/7/ | User: admin@test.local | IP: 127.0.0.1
+########
+[2025-07-07 19:39:38] ERROR custom_loger error with changed the image size [Errno 2] No such file or directory: '/mnt/disk2/programing_proejects/view_isp/back/django_project/media_root_dir/profile_img/images.jpeg' | Method: PUT | Path: /api/staff/usersmanagment/users/7/ | User: admin@test.local | IP: 127.0.0.1
+########

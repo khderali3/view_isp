@@ -157,6 +157,9 @@ def detect_environment_type():
 
 # ----------------- MAIN ID GENERATION -------------------
 
+ 
+ 
+
 def generate_device_app_fingerprint():
     cpu_serial = get_cpu_serial()
     nic_name, mac, ip = get_first_nic_info()
@@ -166,10 +169,15 @@ def generate_device_app_fingerprint():
     app_info = get_or_create_installation_info('ticketSystem')
     app_installation_id = app_info.get('installation_id')
     app_name_id = app_info.get('app_name')
+    current_file_path = os.path.abspath(__file__)
 
-    raw_string = f'{cpu_serial}|{nic_name}|{mac}|{ip}|{partition_uuid}|{hostname}|{app_installation_id}|{app_name_id}||{environment_type}'
+
+
+
+    raw_string = f'{cpu_serial}|{nic_name}|{mac}|{ip}|{partition_uuid}|{hostname}|{app_installation_id}|{app_name_id}|{environment_type}|{current_file_path}'
     device_app_fingerprint = hashlib.sha256(raw_string.encode('utf-8')).hexdigest()
 
+      
     return {
         'cpu_serial': cpu_serial,
         'nic_name': nic_name,
@@ -181,7 +189,7 @@ def generate_device_app_fingerprint():
         "app_name_id" : app_name_id,  
         'environment_type': environment_type,
         'device_app_fingerprint': device_app_fingerprint,
-      
+       
     }
 
  

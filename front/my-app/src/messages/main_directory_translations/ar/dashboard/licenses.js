@@ -15,4 +15,5 @@ export default  {
     Issued_To : "صادرة إلى",
     Device_And_App_Fingerprint: "بصمة التطبيق والجهاز",
     Status: 'الحالة',
+    Reason : "السبب",
 }

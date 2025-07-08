@@ -11,8 +11,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
 
 
 
-
-
 from projectFlowApp.extra_modules.license_check.utils import get_or_create_installation_info
  
 
@@ -169,8 +167,9 @@ def generate_device_app_fingerprint():
     app_info = get_or_create_installation_info('projectFlowApp')
     app_installation_id = app_info.get('installation_id')
     app_name_id = app_info.get('app_name')
+    current_file_path = os.path.abspath(__file__)
 
-    raw_string = f'{cpu_serial}|{nic_name}|{mac}|{ip}|{partition_uuid}|{hostname}|{app_installation_id}|{app_name_id}||{environment_type}'
+    raw_string = f'{cpu_serial}|{nic_name}|{mac}|{ip}|{partition_uuid}|{hostname}|{app_installation_id}|{app_name_id}|{environment_type}|{current_file_path}'
     device_app_fingerprint = hashlib.sha256(raw_string.encode('utf-8')).hexdigest()
 
     return {

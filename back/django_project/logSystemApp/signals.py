@@ -2,7 +2,7 @@ import json
 from django.db.models.signals import pre_save, post_save, pre_delete
 from django.dispatch import receiver
 from django.utils import timezone
-from .models import Log
+from .models import Log, ErrorLog
 # from .custom_app_utils import get_client_ip
  
 
@@ -23,7 +23,7 @@ from django.forms.models import model_to_dict
 
 from social_django.models import UserSocialAuth, Association, Nonce
 from django.contrib.admin.models import LogEntry
-EXCLUDED_MODELS = {Log, LogEntry, UserSocialAuth, Association, Nonce}
+EXCLUDED_MODELS = {Log, ErrorLog, LogEntry, UserSocialAuth, Association, Nonce}
 
 
 

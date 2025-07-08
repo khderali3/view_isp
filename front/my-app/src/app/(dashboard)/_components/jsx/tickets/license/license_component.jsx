@@ -28,7 +28,7 @@ const TicketLisenseComponent = () =>{
         application: '',
         app_installation_id: '',
         issued_to : "",
-        is_valid : "",
+        is_valid : null,   
         reason : null,
     });
 
@@ -44,11 +44,7 @@ const TicketLisenseComponent = () =>{
         }
     };
  
-
-
-
-
-
+ 
 
 
     const fetchData = async () => {
@@ -74,102 +70,174 @@ const TicketLisenseComponent = () =>{
 
 
  
+  // Placeholder JSX for showing bootstrap placeholders
+  const PlaceholderItem = () => (
+      <div className="placeholder-glow">
+        <span className="placeholder col-6"></span>
+      </div>  
+      );
 
-    return(
-        <>
-        
-            <div className="row justify-content-center">
-              <div className=" ">
+  if (!data.license_id) {
+    // No license_id: show all elements with bootstrap placeholders
+    return (
+      <div className="row justify-content-center">
+        <div className="">
+          <div className="card shadow-sm">
+            <div className="card-header bg-light">
+              <h5 className="mb-0">{t('title')} : {t('Ticketing_System')}</h5>
+            </div>
+            <div className="card-body">
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('License_ID')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Application')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Issued_At')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Expires_At')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('License_Type')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('App_Installation_ID')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Issued_To')} : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Device_And_App_Fingerprint')}  : </strong>
+                  <div className="text-muted"><PlaceholderItem /></div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Status')} : </strong>
  
-
-                <div className="card shadow-sm">
-                  <div className="card-header bg-light ">
-                    <h5 className="mb-0">{t('title')} : {t('Ticketing_System')}</h5>
+                  <div className="placeholder-glow">
+                    <span className="placeholder col-2"></span>
                   </div>
-                  <div className="card-body">
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <strong>{t('License_ID')} : </strong>
-                        <div className="text-muted">{data.license_id || "N/A"}</div>
-                      </div>
-                      <div className="col-md-6">
-                        <strong>{t('Application')} : </strong>
-                        <div className="text-muted">{data.application || "N/A"}</div>
-                      </div>
-                    </div>
 
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <strong>{t('Issued_At')} : </strong>
-                        <div className="text-muted">  
-                          {data?.issued_at ? formatDate(data.issued_at) : "N/A"}
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <strong>{t('Expires_At')} : </strong>
-                        <div className="text-muted">
-                           {data?.expires_at ? formatDate(data.expires_at) : "N/A"}
 
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <strong>{t('License_Type')}  : </strong>
-                        <div className="text-muted">{data.license_type || "N/A"}</div>
-                      </div>
-                      <div className="col-md-6">
-                        <strong>{t('App_Installation_ID')} : </strong>
-                        <div className="text-muted">{data.app_installation_id || "N/A"}</div>
-                      </div>
-                    </div>
 
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <strong>{t('Issued_To')} : </strong>
-                        <div className="text-muted">{data.issued_to || "N/A"}</div>
-                      </div>
-                      <div className="col-md-6">
-                        <strong>{t('Device_And_App_Fingerprint')}  : </strong>
-                        <div className="text-muted">{data.device_app_fingerprint || "N/A"}</div>
-                      </div>
-                    </div>
 
-                    <div className="row mb-3">
-                      <div className="col-md-6">
-                        <strong>{t('Status')} : </strong>
-                        <span className={`badge mx-2 ${data.is_valid ? 'bg-success' : 'bg-danger'}`}>
+                </div>
+              </div>
 
-                          {locale === "ar" 
-                            ? (data.is_valid ? "صالحة" : "غير صالحة") 
-                            : (data.is_valid ? "Valid" : "Invalid")
-                          }
- 
-                        </span>
-                      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-                      {data.reason && (
-                        <div className="col-md-6">
-                          <strong>Reason:</strong>
-                          <div className="text-danger">{data.reason}</div>
-                        </div>
-                      )}
-                    </div>
+  // license_id exists, show original JSX
+  return (
+    <>
+      <div className="row justify-content-center">
+        <div className=" ">
+          <div className="card shadow-sm">
+            <div className="card-header bg-light ">
+              <h5 className="mb-0">{t('title')} : {t('Ticketing_System')}</h5>
+            </div>
+            <div className="card-body">
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('License_ID')} : </strong>
+                  <div className="text-muted">{data.license_id || "N/A"}</div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Application')} : </strong>
+                  <div className="text-muted">{data.application || "N/A"}</div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Issued_At')} : </strong>
+                  <div className="text-muted">
+                    {data?.issued_at ? formatDate(data.issued_at) : "N/A"}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Expires_At')} : </strong>
+                  <div className="text-muted">
+                    {data?.expires_at ? formatDate(data.expires_at) : "N/A"}
                   </div>
                 </div>
               </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('License_Type')} : </strong>
+                  <div className="text-muted">{data.license_type || "N/A"}</div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('App_Installation_ID')} : </strong>
+                  <div className="text-muted">{data.app_installation_id || "N/A"}</div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Issued_To')} : </strong>
+                  <div className="text-muted">{data.issued_to || "N/A"}</div>
+                </div>
+                <div className="col-md-6">
+                  <strong>{t('Device_And_App_Fingerprint')}  : </strong>
+                  <div className="text-muted">{data.device_app_fingerprint || "N/A"}</div>
+                </div>
+              </div>
+
+              <div className="row mb-3">
+                <div className="col-md-6">
+                  <strong>{t('Status')} : </strong>
+                  {data.is_valid != null && (
+                    <span className={`badge mx-2 ${data.is_valid ? 'bg-success' : 'bg-danger'}`}>
+                      {locale === "ar"
+                        ? (data.is_valid ? "صالحة" : "غير صالحة")
+                        : (data.is_valid ? "Valid" : "Invalid")}
+                    </span>
+                  )}
+                </div>
+
+                {data.reason && (
+                  <div className="col-md-6">
+                    <strong>{t('Reason')} : </strong>
+                    <div className="text-danger">{data.reason}</div>
+                  </div>
+                )}
+              </div>
             </div>
-
-            <hr className="my-4"/>    
-         
-        
-        </>
-
-
-
-
-    )
+          </div>
+        </div>
+      </div>
+      <hr />
+    </>
+  );
 }
 
 export default TicketLisenseComponent

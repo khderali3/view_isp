@@ -85,10 +85,10 @@ def save_license_file(license_package, filename='license.json'):
 
 if __name__ == '__main__':
     # Example usage: replace with actual client machine_id
-    device_app_fingerprint = 'ba09161438c1436d40ef795e5ca85c95e6262813c7ae213a355b8ef4c97b5862'
-    for_app_installation_id  =  "b23e90b7-78bc-4972-9cca-947b3e47f4dc"
+    device_app_fingerprint = 'dcc5cb466ed1dc76f04cf6c528d7c98b76c2d2638610f359b2b78e60b11ee88e'
+    for_app_installation_id  = "b23e90b7-78bc-4972-9cca-947b3e47f4dc"
     for_application = "CloudTechSKy ProjectFlow System"
     for_app_Name_id = "projectFlowApp" 
-    for_issued_to = "View ISP Company"
+    for_issued_to = "CloudTech Sky Company"
     license_package = generate_license(device_app_fingerprint, for_app_Name_id, for_application, for_app_installation_id, for_issued_to, valid_days=365, license_type='pro')
     save_license_file(license_package)

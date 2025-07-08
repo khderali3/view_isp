@@ -18,7 +18,7 @@ import { useTranslations, useLocale } from "next-intl";
 
 import { DeleteButton } from "./delete_object";
 
-import { getErrorMessage } from "@/app/public_utils/utils";
+
 
 
 import Link from "next/link";
@@ -64,15 +64,6 @@ const fetchData = async (pageUrl) => {
 	  });
  	  if( response && response.data) {
 		setdata(response.data)
-	  }
-	  else{
-
-		if (response?.error?.data?.message) {
-			toast.error(getErrorMessage(response.error.data.message));
-		} else {
-			console.log(response);
-		}
-
 	  }
 
 	} catch (error) {

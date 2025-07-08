@@ -15,4 +15,6 @@ export default  {
     Issued_To : "Issued To",
     Device_And_App_Fingerprint: "Device And App Fingerprint",
     Status: 'Status',
+    Reason : "Reason",
+
 }

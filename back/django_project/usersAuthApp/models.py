@@ -5,6 +5,12 @@ from django.contrib.auth.models import (
     PermissionsMixin
 )
 from django.db.models.signals import post_save
+import logging
+
+custom_loger = logging.getLogger("custom_loger")
+
+
+
 
 
 from django.utils.text import slugify
@@ -68,7 +74,6 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         return f"{self.first_name} {self.last_name}"
 
 
-
 class Profile(models.Model):
     PRF_user = models.OneToOneField(UserAccount, related_name='profile_prf_user_relaed_useraccount', on_delete=models.CASCADE)
     PRF_company = models.CharField(max_length=255, blank=True, null=True)
@@ -79,20 +84,34 @@ class Profile(models.Model):
     PRF_slug = models.SlugField(max_length=50, blank=True, null=True)
     PRF_image = models.ImageField(upload_to='profile_img', blank=True, null=True )
     def save(self , *args , **kwargs):
+
+        print('save is called')
+
         # add slug value
         if not self.PRF_slug :
             self.PRF_slug = slugify(f"{self.PRF_user.id}_{self.PRF_user.email}")
         super(Profile , self).save( *args , **kwargs)
 
+     
 
         if self.PRF_image:
-            img = Image.open(self.PRF_image.path)
-            if img.width > 300 or img.height > 300:
-                output_size = (300, 300)
-                img.thumbnail(output_size)
-                img.save(self.PRF_image.path)
+            try:
+                img = Image.open(self.PRF_image.path)
+                if img.width > 300 or img.height > 300:
+                    output_size = (300, 300)
+                    img.thumbnail(output_size)
+                    img.save(self.PRF_image.path)
+
+            except Exception as e :
+                custom_loger.error(f"error with changed the image size {e}")
+ 
 
 
+
+
+
+
+ 
 # create profile automatically  when the user is created using (signal) ##
 from django.dispatch import receiver
 

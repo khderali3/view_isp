@@ -1,27 +1,38 @@
 
-from decouple import config
 from pathlib import Path
 from datetime import timedelta
+import os
 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# from decouple import config
+
+from decouple import Config, RepositoryEnv
+
+
+DEBUG = True
+
+IS_PRODUCTION_ENV = False
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ENV_FILE = os.getenv("DJANGO_ENV_FILE", BASE_DIR / ".env.development")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
+ENV_FILE = BASE_DIR / (".env.production" if IS_PRODUCTION_ENV else ".env.development")
+
+
+config = Config(RepositoryEnv(ENV_FILE))
 
 
 SECRET_KEY = config("SECRET_KEY")
 
 
+ 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS=['127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS=['127.0.0.1', 'localhost', 'back.cloudtech-it.com']
 
 # Application definition
 
@@ -37,19 +48,25 @@ INSTALLED_APPS = [
     'djoser',
     'rest_framework',
     'social_django',
-    'django_celery_beat',
     # project apps 
     'usersAuthApp',
     'staffAuthApp',
     'siteusersApp',
-    'ticketSystemApp',
+    # 'ticketSystemApp',
+    'ticketSystemApp.apps.TicketsystemappConfig',
+
     'sitestaffApp',
 	# 'ticketSystemStaffApp',
-    'ticketSystemStaffApp.apps.TicketsystemstaffappConfig',  # this uses your custom AppConfig
+    'ticketSystemStaffApp.apps.TicketsystemstaffappConfig',   
 
 	'usersManagmentStaffApp',
-    'projectFlowApp',
+    # 'projectFlowApp',
+    'projectFlowApp.apps.ProjectflowappConfig',
+
     'logSystemApp',
+    'django_celery_beat',
+
+
 ]
 
 
@@ -59,19 +76,48 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+if not IS_PRODUCTION_ENV:
 
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'usersAuthApp.authentication.CustomJWTAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}
-
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'usersAuthApp.authentication.CustomJWTAuthentication',
+        ],
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated',
+        ],
+        'DEFAULT_RENDERER_CLASSES': [
+            'rest_framework.renderers.JSONRenderer',
+            'rest_framework.renderers.BrowsableAPIRenderer',
+        ],
+    }
+else:
+    REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': [
+            'usersAuthApp.authentication.CustomJWTAuthentication',
+        ],
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated',
+        ],
+        'DEFAULT_RENDERER_CLASSES': [
+            'rest_framework.renderers.JSONRenderer',
+        ],
+    }
 #DJOSER domain and site name to use it with email templates.
-DOMAIN = 'localhost:3000'
+if IS_PRODUCTION_ENV:
+    RECAPTCHA_ENABLED = True
+
+    DOMAIN = 'cloudtech-it.com'
+    SOCIAL_AUTH_ALLOWED_REDIRECT_URIS = ['https://cloudtech-it.com/account/google']
+    MY_SITE_URL = 'https://back.cloudtech-it.com'  # Replace with your domain in production
+
+else:
+    RECAPTCHA_ENABLED = False
+
+    DOMAIN = 'localhost:3000'
+    SOCIAL_AUTH_ALLOWED_REDIRECT_URIS = ['http://localhost:3000/account/google' ]
+    MY_SITE_URL = 'http://localhost:8000'  # Replace with your domain in production
+
+
 SITE_NAME = 'CloudTech Sky Company '
 
 
@@ -83,12 +129,12 @@ SITE_NAME = 'CloudTech Sky Company '
 DJOSER = {
 
     'PASSWORD_RESET_CONFIRM_URL': 'account/password-reset/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': False,
+    'SEND_ACTIVATION_EMAIL': True,
     'ACTIVATION_URL': 'account/activation/{uid}/{token}',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
-    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS':['http://localhost:3000/account/google' ],
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS':SOCIAL_AUTH_ALLOWED_REDIRECT_URIS,
     'SOCIAL_AUTH_TOKEN_STRATEGY': "usersAuthApp.myutils.custom_serializers.CustomProviderTokenStrategy",
 
     'SERIALIZERS': {
@@ -134,9 +180,17 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 
 
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://127.0.0.1:3000'
+# ]
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'https://cloudtech-it.com',
+    'http://cloudtech-it.com:3000',
+    'http://cloudtech-it.com'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -144,18 +198,14 @@ CORS_ALLOW_CREDENTIALS = True
 
 SIMPLE_JWT = {
 
-  "TOKEN_OBTAIN_SERIALIZER": "usersAuthApp.myutils.custom_serializers.MyTokenObtainPairSerializer",
-
-    "ACCESS_TOKEN_LIFETIME": timedelta(weeks=104),
-
+    "TOKEN_OBTAIN_SERIALIZER": "usersAuthApp.myutils.custom_serializers.MyTokenObtainPairSerializer",
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(weeks=104),
 }
 
 
 MIDDLEWARE = [
-    # "usersAuthApp.custommiddlewareCors.CorsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
-
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,11 +213,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'logSystemApp.middleware.RequestMiddleware',
-    # 'projectFlowApp.middleware.RequestMiddleware',
     'django_project.middleware.RequestMiddleware',
-
-
 ]
 
 
@@ -195,35 +241,31 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+
+if IS_PRODUCTION_ENV:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config("DB_NAEM"),  # Replace with your database name
+            'USER': config("DB_USER"),         # Default MySQL username
+            'PASSWORD': config("DB_PASSWORD"),         # Default MySQL password (empty for XAMPP)
+            'HOST': config("DB_HOST"),    # Default MySQL host
+            'PORT': config("DB_PORT"),         # Default MySQL port
+        }
     }
-}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'django_cloudtech',  # Replace with your database name
-#         'USER': 'db_cloudtech_user',         # Default MySQL username
-#         'PASSWORD': 'db_cloudtech_password',         # Default MySQL password (empty for XAMPP)
-#         'HOST': '127.0.0.1',    # Default MySQL host
-#         'PORT': '3306',         # Default MySQL port
-#     }
-# }
+else:
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': config("DB_NAEM"),  # Replace with your database name
-#         'USER': config("DB_USER"),         # Default MySQL username
-#         'PASSWORD': config("DB_PASSWORD"),         # Default MySQL password (empty for XAMPP)
-#         'HOST': config("DB_HOST"),    # Default MySQL host
-#         'PORT': config("DB_PORT"),         # Default MySQL port
-#     }
-# }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
+ 
+ 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -249,17 +291,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Damascus'
+USE_TZ = True
+ 
 
 USE_I18N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -270,40 +315,29 @@ AUTH_USER_MODEL = 'usersAuthApp.UserAccount'
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_BACKEND = 'usersAuthApp.email_backend.SSLIgnoreEmailBackend'
 
 EMAIL_HOST = config("EMAIL_HOST")
-EMAIL_USE_TLS = config("EMAIL_USE_TLS")
 EMAIL_USE_SSL = config("EMAIL_USE_SSL")
 EMAIL_PORT = config("EMAIL_PORT")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")  # Your email password
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 
-
-
-
-
-# EMAIL_HOST_USER = 'your email address@gmail.com'
-# EMAIL_HOST_PASSWORD = 'gmail API Key (password)'
-
-'''
-test email from django shell
-python .\manage.py shell
-from django.core.mail import send_mail
-send_mail('cloudTech sky test', 'This is a test from cloudtech sky application', 'khder@view.sy', ['khdersliman3@gmail.com'],fail_silently=False)
-
-send_mail('Test4', 'This is a test4',None ,['khdersliman3@gmail.com'],fail_silently=False)
-'''
-
-import os
-
+ 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root_dir/')
 MEDIA_URL = '/media_url/'
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = []
 
-MY_SITE_URL = 'http://localhost:8000'  # Replace with your domain in production
 
 
-RECAPTCHA_ENABLED = False
+
+
 
 #auth cookie settings 
 AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 * 2 
@@ -333,3 +367,121 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
  
+
+
+
+ 
+
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "verbose": {
+#             "format": "[{asctime}] {levelname} {name} {message}\n########",
+#             "style": "{",
+#             "datefmt": "%Y-%m-%d %H:%M:%S",
+#         },
+#     },
+#     "handlers": {
+#         "file": {
+#             "level": "ERROR",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(BASE_DIR, "django_errors.log"),
+#             "formatter": "verbose",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["file"],
+#             "level": "ERROR",
+#             "propagate": True,
+#         },
+#     },
+# }
+ 
+ 
+
+
+
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "request_context": {
+            "()": "django_project.logs_utils.RequestLogFilter",  # Adjust path if needed
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": (
+                "[{asctime}] {levelname} {name} {message} "
+                "| Method: {request_method} | Path: {request_path} | User: {user_display} | IP: {client_ip}"
+                "\n########"
+            ),
+            "style": "{",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+        "default": {
+            "()": "django.utils.log.ServerFormatter",
+            "format": "[{server_time}] {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "django_errors.log"),
+            "formatter": "verbose",
+            "filters": ["request_context"],
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "default",  # <-- use Django's built-in format
+        },
+
+        "db": {
+            "level": "ERROR",
+            "class": "django_project.logs_utils.DBErrorLogHandler",  # Adjust to your file path
+            "filters": ["request_context"],
+        },
+
+     },
+    "loggers": {
+
+        "": {
+            "handlers": ["file", "console"],
+            "level": "WARNING",  # or ERROR, depending on how verbose you want root logs
+        },
+
+
+        "custom_loger": {
+            "handlers": ["file", "db", "console"],  # Add DB handler
+            "level": "ERROR",
+            "propagate": False,
+        },
+
+        "django.request": {          # Add this!
+            "handlers": ["file", "db", "console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+
+
+        "django.server": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+
+        "django": {
+            "handlers": ["file", "db", "console"],  # Add DB handler
+            "level": "ERROR",
+            "propagate": False,
+        },
+ 
+    },
+}

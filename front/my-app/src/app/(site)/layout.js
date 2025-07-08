@@ -61,6 +61,8 @@ export default  async function   RootLayout({ children }) {
         rel="stylesheet"
       />
          <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
          <meta name="theme-color" content="#000000" />
 
 
@@ -100,7 +102,7 @@ export default  async function   RootLayout({ children }) {
   </NextIntlClientProvider>
 
   
-        <Script src={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/js/bootstrap.bundle.min.js`} />
+        <Script src={`/js/bootstrap.bundle.min.js`} />
 
 
       </body>

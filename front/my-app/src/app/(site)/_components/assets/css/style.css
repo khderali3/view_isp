@@ -912,7 +912,7 @@ footer .container .row > div{
  
  
 .projects-section {
-  min-height: 80vh;
+  min-height: 100vh;
   background-color: var(--primary-2-color);
   padding-top: 60px;
   padding-bottom: 80px;

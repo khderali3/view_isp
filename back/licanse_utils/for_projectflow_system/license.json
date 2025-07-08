@@ -1,14 +1,14 @@
 {
     "license": {
-        "license_id": "fa8d0c33-568a-11f0-b5fa-ec3b2de7d03c",
-        "device_app_fingerprint": "ba09161438c1436d40ef795e5ca85c95e6262813c7ae213a355b8ef4c97b5862",
-        "issued_at": "2025-07-01T14:52:15Z",
-        "expires_at": "2026-07-01T14:52:15Z",
+        "license_id": "a6e7a77f-5933-11f0-ae8e-72bfc55154fe",
+        "device_app_fingerprint": "dcc5cb466ed1dc76f04cf6c528d7c98b76c2d2638610f359b2b78e60b11ee88e",
+        "issued_at": "2025-07-05T00:04:42Z",
+        "expires_at": "2026-07-05T00:04:42Z",
         "license_type": "pro",
         "application": "CloudTechSKy ProjectFlow System",
         "app_Name_id": "projectFlowApp",
         "app_installation_id": "b23e90b7-78bc-4972-9cca-947b3e47f4dc",
-        "issued_to": "View ISP Company"
+        "issued_to": "CloudTech Sky Company"
     },
-    "signature": "QK0G5A2Ys4+4GaNp+1zRfWPsaxe+lqTXnvSFY7YCE/FedHtyK1vuB7Z7CfRXzUpNKoK49uf8IVCAU1btE1QqRGiJRvsSll2NDvcZUPgwQx/gD5L/fo6Y1v9pUGE41lZMyEB/3qNc4VYX8JlCIRDncrymstFNsx1zRqx0x07c6dYI9oMlpHT96kNUeOZW7r4rX30aVifyVB7geL2QaJtlg6VrDQxdVRnjdkUasfx9didVQsLJDATcGuRxLmky0ew4OmkfSc+sPL+VA4PnDpio2UiYSBJNH9D1d+il4JuTugAzhl26tKOk9KUr/1hgHZot4HXakADznfQTxTfwmBLCnQ=="
+    "signature": "Z0bYDv/wNb9tTkYyO4gkzImVqlFxmAefBRclOKIEkkNvXHWChTP5xxFBf+2iZZNEMXQsIm+fztDTYSPvb5zvAwyoenZ1pLV46wXJdwkXfzfwMP9JjIL9EP2x4F4nNi67/DfOQEuSzf76ZCPQ1HVtbINXUU2jBDePEiE58LbOuTalOrSmb814vTwvk9GrsBeIV8mNis9obAzNZ2FdD6Eep5fQI9g1vRuJP8XkGvf5O1mgfVL4hz/Bevaglpif46QN6UKrKXfHBOBF4qp9DXvN0tqAGdMEQF3q8bO2wtUl1khtueBGeNdzumfLJ5NTHpfyqTIvCA5ogoKos68LNVfpdQ=="
 }

@@ -65,7 +65,7 @@ const Home = async () => {
 
   <section id="" className='   '> 
 
-    <div className="projects-section  h-100" id="Products">
+    <div className="projects-section  " id="Products">
       <div className="container">
         <div className="text text-center">
           <h3 className="fs-1 fw-bolder">

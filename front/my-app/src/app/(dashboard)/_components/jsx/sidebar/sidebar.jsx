@@ -295,13 +295,19 @@ useEffect(() => {
 
 
                       <li className="nav-item text-light w-100 ">
-                        <Link href="/staff/logs" className={` rounded text-light nav-link    ${isActive('/staff/logs', true) ? ' active_class' : '' }     `}  >
+                        <Link href="/staff/logs/audit_logs" className={` rounded text-light nav-link    ${isActive('/staff/logs/audit_logs', true) ? ' active_class' : '' }     `}  >
                         <i className= 'nav-icon bi bi-circle '  />
-                        <p>{locale === 'ar' ? 'كافة السجلات' : 'All Logs'}</p>
+                        <p>{locale === 'ar' ? 'سجلات التدقيق' : 'Audit Logs'}</p>
                         </Link>
                       </li>
 
 
+                      <li className="nav-item text-light w-100 ">
+                        <Link href="/staff/logs/error_logs" className={` rounded text-light nav-link    ${isActive('/staff/logs/error_logs', true) ? ' active_class' : '' }     `}  >
+                        <i className= 'nav-icon bi bi-circle '  />
+                        <p>{locale === 'ar' ? 'سجلات الأخطاء' : 'Eroor Logs'}</p>
+                        </Link>
+                      </li>
 
 
                     </ul>
