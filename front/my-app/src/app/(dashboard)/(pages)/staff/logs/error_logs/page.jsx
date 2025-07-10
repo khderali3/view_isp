@@ -575,7 +575,7 @@ if (!hasPermissionToLogsView()  ) {
                         </div>
 
                         <div className="mb-1">
-                          <strong>{t('User')} : </strong> {obj?.user?.email || <span className="text-muted fst-italic">{t('Anonymous')}</span>}
+                          <strong>{t('User')} : </strong> {obj?.user?.email  }
                         </div>
 
                         <div className="mb-1">
