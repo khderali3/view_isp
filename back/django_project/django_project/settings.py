@@ -13,6 +13,15 @@ DEBUG = True
 
 IS_PRODUCTION_ENV = False
 
+USE_AUTH_COOKIE_HTTPONLY = True
+
+
+
+
+
+
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ENV_FILE = os.getenv("DJANGO_ENV_FILE", BASE_DIR / ".env.development")
@@ -339,12 +348,24 @@ STATICFILES_DIRS = []
 
 
 
-#auth cookie settings 
+# Auth cookie settings
 AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 * 2 
-AUTH_COOKIE_SECURE =  True
-AUTH_COOKIE_HTTP_ONLY = True
 AUTH_COOKIE_PATH = '/'
-AUTH_COOKIE_SAMESITE = 'None'
+
+if USE_AUTH_COOKIE_HTTPONLY:
+    AUTH_COOKIE_SECURE = True
+    AUTH_COOKIE_HTTP_ONLY = True
+    AUTH_COOKIE_SAMESITE = 'None'
+else:
+    AUTH_COOKIE_SECURE = False
+    AUTH_COOKIE_HTTP_ONLY = False
+    AUTH_COOKIE_SAMESITE = 'lax'
+
+
+
+
+
+
 
 
 PROJECT_FLOW_PAGINATION_PAGE_SIZE = 30
