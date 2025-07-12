@@ -241,7 +241,6 @@ const Page = () => {
   }, [  userId ]);
 
 
-
  
 
 const handleScroll = () => {
@@ -410,7 +409,7 @@ if (!hasPermissionToLogsView()  ) {
               </div>
 
 
-              
+{/*               
             <div className="table-responsive">
               <table className="table table-hover table-bordered table-striped table-sm align-middle small d-none d-md-table w-100">
                 <thead className="table-light">
@@ -505,9 +504,149 @@ if (!hasPermissionToLogsView()  ) {
                   </tbody>
 
               </table>
-            </div>
+            </div> */}
 
 
+<div className="table-responsive">
+  <table className="table table-hover table-bordered table-striped table-sm align-middle small d-none d-md-table w-100"
+    style={{ tableLayout: "fixed", width: "100%" }}>
+    <thead className="table-light">
+      <tr>
+        <th style={{ width: "3%" }}>
+          <input
+            type="checkbox"
+            checked={selectedIds.length === data.length && data.length > 0}
+            onChange={toggleSelectAll}
+          />
+        </th>
+        <th style={{ width: "10%" }}>{t('User')}</th>
+        <th style={{ width: "8%" }}>{t('ip_address')}</th>
+        <th style={{ width: "7%" }}>{t('Level')}</th>
+        <th style={{ width: "6%" }}>{t('Method')}</th>
+        <th style={{ width: "8%" }}>{t('Path')}</th>
+        <th style={{ width: "18%" }}>{t('Message')}</th>
+        <th style={{ width: "10%" }}>{t('Date')}</th>
+        <th style={{ width: "20%" }}>{t('Traceback')}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data?.length > 0 ? (
+        data.map((obj) => (
+          <tr key={`table_${obj.id}`}>
+            <td>
+              <input
+                type="checkbox"
+                checked={selectedIds.includes(obj.id)}
+                onChange={() => toggleSelectRow(obj.id)}
+              />
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.user?.email}
+              >
+                {obj?.user?.email}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.ip_address}
+              >
+                {obj?.ip_address}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.level}
+              >
+                {obj?.level}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.request_method}
+              >
+                {obj?.request_method}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.request_path}
+              >
+                {obj?.request_path}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={obj?.message}
+              >
+                {obj?.message}
+              </div>
+            </td>
+
+            <td>
+              <div
+                style={{ overflowX: "auto", maxWidth: "100%", whiteSpace: "nowrap" }}
+                title={formatDate(obj?.timestamp)}
+              >
+                {formatDate(obj?.timestamp)}
+              </div>
+            </td>
+
+            <td>
+              {obj?.traceback ? (
+                <pre
+                  className="mb-0"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "200px",
+                    overflow: "auto",
+                    fontSize: "0.75rem",
+                    fontFamily: "monospace",
+                    whiteSpace: "pre-wrap",
+                    direction: "ltr",
+                  }}
+                  title={obj?.traceback?.replace(/\n/g, ' ')}
+                  >
+                  title={
+                    obj?.traceback 
+                      ? (obj.traceback.length > 200 ? obj.traceback.slice(0, 200).replace(/\n/g, ' ') + '...' : obj.traceback.replace(/\n/g, ' '))
+                      : ''
+                  }                
+                </pre>
+              ) : (
+                <span className="text-muted fst-italic">{t('No_Errors')}</span>
+              )}
+            </td>
+ 
+
+
+
+
+
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={9} className="text-center text-muted py-4">
+            {t('No_data_available')}
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
 
 
 

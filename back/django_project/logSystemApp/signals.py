@@ -18,12 +18,14 @@ User = get_user_model()
 from django.db.models.signals import m2m_changed
 
 from django.forms.models import model_to_dict
+from django_celery_beat.models import PeriodicTask
+from django.contrib.sessions.models import Session
 
 
 
 from social_django.models import UserSocialAuth, Association, Nonce
 from django.contrib.admin.models import LogEntry
-EXCLUDED_MODELS = {Log, ErrorLog, LogEntry, UserSocialAuth, Association, Nonce}
+EXCLUDED_MODELS = {Log, ErrorLog, LogEntry, UserSocialAuth, Association, Nonce, PeriodicTask, Session}
 
 
 
